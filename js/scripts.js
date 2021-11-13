@@ -103,6 +103,7 @@ if (btn) {
 }
 
 if (errorCount >= 2){
+  console.log("Game over!");
   if (window.confirm("Erfolgshungrig?")) {
     seq = sigmaProof;
     output.innerText = seq;
@@ -114,9 +115,15 @@ if (errorCount >= 2){
 startDea.addEventListener('click', function () {
   const machine = new Dea(seq);
   // console.log(machine.response);
-  response.innerText = machine.state;
+  if (machine.state == null) {
+    response.innerText = "Fehler!";
+  } else {
+    response.innerText = "Neuer Status: " + machine.state;
+  }
+  
 
   runCount += 1;
   if (machine.state == null) errorCount += 1;
   console.log(runCount);
+  console.log(errorCount);
 })
