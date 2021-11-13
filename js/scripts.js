@@ -22,12 +22,14 @@ class Dea {
 
       this.state = 0;
       this.finalState = 7;
+      this.response = null;
 
       for (const val of sequence) {
           this.state = this.transition(val);
           if (this.state === undefined) {
               console.log(error);
-              return error;
+              this.response = reject;
+              return this.response;
               break;
           }
           console.log(`Neuer Status: ${this.state}`);
@@ -98,6 +100,6 @@ if (btn) {
 
 startDea.addEventListener('click', function (){
   const machine = new Dea(seq);
-  console.log(machine);
-  // response.innerText = machine;
+  console.log(machine.response);
+  // response.innerText = machine.response;
 })
