@@ -27,6 +27,7 @@ class Dea {
           this.state = this.transition(val);
           if (this.state === undefined) {
               console.log(error);
+              return error;
               break;
           }
           console.log(`Neuer Status: ${this.state}`);
@@ -84,6 +85,7 @@ function getSequence() {
 const btn = document.getElementById('generateSequence');
 const output = document.getElementById('output');
 const startDea = document.getElementById('startDea');
+const response = document.getElementById('response');
 
 if (btn) {
   btn.addEventListener('click', function (event) {
@@ -96,4 +98,5 @@ if (btn) {
 
 startDea.addEventListener('click', function (){
   const machine = new Dea(seq);
+  response.innerText = machine;
 })
