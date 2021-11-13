@@ -102,7 +102,7 @@ if (btn) {
   })
 }
 
-if (errorCount >= 2){
+function runProof() {
   console.log("Game over!");
   if (window.confirm("Erfolgshungrig?")) {
     seq = sigmaProof;
@@ -112,6 +112,7 @@ if (errorCount >= 2){
   }
 }
 
+
 startDea.addEventListener('click', function () {
   const machine = new Dea(seq);
   // console.log(machine.response);
@@ -120,10 +121,11 @@ startDea.addEventListener('click', function () {
   } else {
     response.innerText = "Neuer Status: " + machine.state;
   }
-  
-
   runCount += 1;
   if (machine.state == null) errorCount += 1;
+  if (errorCount >= 2) {
+    runProof();
+  }
   console.log(runCount);
   console.log(errorCount);
 })
