@@ -101,5 +101,5 @@ if (btn) {
 startDea.addEventListener('click', function (){
   const machine = new Dea(seq);
   console.log(machine.response);
-  // response.innerText = machine.response;
+  response.innerText = machine.response;
 })
