@@ -4,58 +4,62 @@
 
 const
   sigma = ['B', 'E', 'P', 'S', 'T', 'V', 'X'], //the alphabet of words
+  sigmaProof = ['B', 'P', 'V', 'V', 'E'],
   min = 5,
   max = 15
   ;
 
-var seq;
+var seq,
+  runCount = 0,
+  errorCount = 0
+  ;
 
 class Dea {
   constructor(sequence) {
-      console.log(sequence);
+    console.log(sequence);
 
-      const
-          accept = "Zeichenfolge akzeptiert",
-          reject = "Zeichenfolge abgelehnt",
-          error = "Fehler"
-          ;
+    const
+      accept = "Zeichenfolge akzeptiert",
+      reject = "Zeichenfolge abgelehnt",
+      error = "Fehler"
+      ;
 
-      this.state = 0;
-      this.finalState = 7;
-      this.response = null;
+    this.state = 0;
+    this.finalState = 7;
+    this.response = null;
 
-      for (const val of sequence) {
-          this.state = this.transition(val);
-          if (this.state === undefined) {
-              console.log(error);
-              this.response = reject;
-              return this.response;
-              break;
-          }
-          console.log(`Neuer Status: ${this.state}`);
+    for (const val of sequence) {
+      this.state = this.transition(val);
+      if (this.state === undefined) {
+        console.log(error);
+        this.state = null;
+        return this.state;
+        break;
       }
+      console.log(`Neuer Status: ${this.state}`);
+    }
 
-      if (this.state === this.finalState) {
-          console.log(accept);
-      } else {
-          console.log(reject);
-      }
+    if (this.state === this.finalState) {
+      console.log(accept);
+    } else {
+      console.log(reject);
+    }
   }
 
   get transitionStates() {
-      return {
-          0: { B: 1 },
-          1: { P: 3, T: 2 },
-          2: { S: 2, X: 4 },
-          3: { T: 3, V: 5 },
-          4: { S: 6, X: 3 },
-          5: { P: 4, V: 6 },
-          6: { E: 7 }
-      };
+    return {
+      0: { B: 1 },
+      1: { P: 3, T: 2 },
+      2: { S: 2, X: 4 },
+      3: { T: 3, V: 5 },
+      4: { S: 6, X: 3 },
+      5: { P: 4, V: 6 },
+      6: { E: 7 }
+    };
   }
 
   transition(word) {
-      return this.transitionStates[this.state][word];
+    return this.transitionStates[this.state][word];
   }
 }
 
@@ -98,8 +102,21 @@ if (btn) {
   })
 }
 
-startDea.addEventListener('click', function (){
+if (errorCount >= 2){
+  if (window.confirm("Erfolgshungrig?")) {
+    seq = sigmaProof;
+    output.innerText = seq;
+    startDea.classList.add('visible');
+    startDea.classList.remove('invisible');
+  }
+}
+
+startDea.addEventListener('click', function () {
   const machine = new Dea(seq);
-  console.log(machine.response);
-  response.innerText = machine.response;
+  // console.log(machine.response);
+  response.innerText = machine.state;
+
+  runCount += 1;
+  if (machine.state == null) errorCount += 1;
+  console.log(runCount);
 })
