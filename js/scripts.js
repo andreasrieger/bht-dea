@@ -115,6 +115,8 @@ function runProof() {
 
 startDea.addEventListener('click', function () {
   const machine = new Dea(seq);
+  startDea.classList.add('invisible');
+  startDea.classList.remove('visible');
   // console.log(machine.response);
   if (machine.state == null) {
     response.innerText = "Fehler!";
