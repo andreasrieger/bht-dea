@@ -98,6 +98,6 @@ if (btn) {
 
 startDea.addEventListener('click', function (){
   const machine = new Dea(seq);
-  console.log(machine.keys);
+  console.log(machine);
   // response.innerText = machine;
 })
