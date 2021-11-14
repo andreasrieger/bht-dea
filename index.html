@@ -20,16 +20,17 @@
         </button>
         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
           aria-controls="offcanvasExample">
-          Button with data-bs-target
+          Settings
         </button>
       </div>
     </nav>
     <div class="row">
-      <div class="col"></div>
-      <div class="col"></div>
+      <div class="col">Tabelle mit Zuständen</div>
       <div class="col">
+        <h1>Zustandsgraph</h1>
         <p id="response"></p>
       </div>
+      <div class="col"></div>
     </div>
     <div id="exampleModal" class="modal" tabindex="-1">
       <div class="modal-dialog">
@@ -40,12 +41,23 @@
           </div>
           <div class="modal-body">
             <p>Modal body text goes here.</p>
-            <button id="generateSequence" class="btn btn-primary" type="button">Zeichenfolge erstellen</button>
+
             <p id="output"></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button id="startDea" type="button" class="btn btn-primary" data-bs-dismiss="modal">Starte Automaten</button>
+            <div class="col-auto">
+              <div class="input-group mb-3">
+                <input type="text" id="output" class="form-control" placeholder="Recipient's username"
+                  aria-label="Recipient's username" aria-describedby="generateSequence">
+                <button class="btn btn-outline-secondary" type="button" id="generateSequence">Zeichenfolge
+                  erstellen</button>
+              </div>
+              <div class="col-auto">
+                <button type="submit" id="startDea" class="btn btn-primary mb-3" data-bs-dismiss="modal">Starte
+                  Automaten</button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
           </div>
         </div>
       </div>
@@ -58,8 +70,11 @@
       </div>
       <div class="offcanvas-body">
         <div>
-          Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images,
-          lists, etc.
+          <h1>To do:</h1>
+          <ul>
+            <li>Set maximum of sequence length</li>
+            <li>Selector for running mode of the sequence (auto, auto delayed, step by step)</li>
+          </ul>
         </div>
         <div class="dropdown mt-3">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
