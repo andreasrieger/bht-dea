@@ -133,3 +133,8 @@ function getSequence() {
   }
   return arr;
 }
+
+(function (){
+  const foo = new Dea();
+  console.log(foo.transitionStates);
+})();
