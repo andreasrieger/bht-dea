@@ -10,6 +10,7 @@ class Dea {
 
         this.state = 0;
         this.finalState = 7;
+        this.response = null;
 
         for (const val of sequence) {
             this.state = this.transition(val);
@@ -22,8 +23,12 @@ class Dea {
 
         if (this.state === this.finalState) {
             console.log(accept);
+            this.response = accept;
+            return this.response;
         } else {
             console.log(reject);
+            this.response = reject;
+            return this.response;
         }
     }
 

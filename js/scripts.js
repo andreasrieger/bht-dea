@@ -55,7 +55,7 @@ startDea.addEventListener('click', function () {
   runCount += 1;
   if (machine.state == null) errorCount += 1;
   if (errorCount == 3) {
-    runProof(seqProof);
+    runProof();
     errorCount = 0;
   }
   console.log(runCount);
