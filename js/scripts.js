@@ -38,12 +38,13 @@ if (btn) {
 }
 
 const table = (result) => {
-  const obj = {};
-  for (const row of result) {
-    Object.assign(obj, Object.values(row));
-  }
-  return obj;
+  var arr = [];
+  Object.entries(result).map(item => {
+      arr.push(Object.values(item[1]));
+  })
+  return arr;
 };
+
 
 testDea.addEventListener('click', () => {
   const result = runProof();
