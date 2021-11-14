@@ -2,156 +2,73 @@
  * 
  */
 
- const
- sigma = ['B', 'E', 'P', 'S', 'T', 'V', 'X'], //the alphabet of words
- sigmaProof = ['B', 'P', 'V', 'V', 'E'],
- min = 5,
- max = 15
- ;
+const
+  sigma = ['B', 'E', 'P', 'S', 'T', 'V', 'X'], //the alphabet of words
+  seqProof = ['B', 'P', 'V', 'V', 'E'],
+  min = 5,
+  max = 15
+  ;
 
 var seq,
-<<<<<<< HEAD
   runCount = 0,
   errorCount = 0
   ;
 
 
-function runProof(seq) {
-  console.log("Game over!");
-  if (window.confirm("Erfolgshungrig?")) {
+function runProof() {
+  seqOutput.value = seqProof;
+  startDea.classList.add('visible');
+  startDea.classList.remove('invisible');
+}
+
+const btn = document.getElementById('generateSequence');
+const output = document.getElementById('output');
+const seqOutput = document.getElementById('output');
+const startDea = document.getElementById('startDea');
+const testDea = document.getElementById('testDea');
+const response = document.getElementById('response');
+
+if (btn) {
+  btn.addEventListener('click', function (event) {
+    seq = getSequence();
+    output.innerText = seq;
     seqOutput.value = seq;
     startDea.classList.add('visible');
     startDea.classList.remove('invisible');
-  }
+  })
 }
 
-class Dea {
-  constructor(sequence) {
-    console.log(sequence);
-
-    const
-      accept = "Zeichenfolge akzeptiert",
-      reject = "Zeichenfolge abgelehnt",
-      error = "Fehler"
-      ;
-
-    this.state = 0;
-    this.finalState = 7;
-    this.response = null;
-
-    if (sequence) {
-      for (const val of sequence) {
-        this.state = this.transition(val);
-        if (this.state === undefined) {
-          console.log(error);
-          this.state = null;
-          return this.state;
-          break;
-        }
-        console.log(`Neuer Status: ${this.state}`);
-      }
-    }
+testDea.addEventListener('click', () => {
+  const result = runProof();
+  response.innerText = result.response;
+})
 
 
-    if (this.state === this.finalState) {
-      console.log(accept);
-      this.response = accept;
-      return response;
-    } else {
-      console.log(reject);
-    }
+startDea.addEventListener('click', function () {
+  const machine = new Dea(seq);
+  startDea.classList.add('invisible');
+  startDea.classList.remove('visible');
+  // console.log(machine.response);
+  if (machine.state == null) {
+    response.innerText = "Fehler!";
+  } else {
+    response.innerText = "Neuer Status: " + machine.state;
   }
-
-  get transitionStates() {
-    return {
-      0: { B: 1 },
-      1: { P: 3, T: 2 },
-      2: { S: 2, X: 4 },
-      3: { T: 3, V: 5 },
-      4: { S: 6, X: 3 },
-      5: { P: 4, V: 6 },
-      6: { E: 7 }
-    };
+  runCount += 1;
+  if (machine.state == null) errorCount += 1;
+  if (errorCount == 3) {
+    runProof(seqProof);
+    errorCount = 0;
   }
-
-  transition(word) {
-    return this.transitionStates[this.state][word];
-  }
-=======
- runCount = 0,
- errorCount = 0
- ;
-
-
-function runProof(seq) {
- console.log("Game over!");
- if (window.confirm("Erfolgshungrig?")) {
-   seqOutput.value = seq;
-   startDea.classList.add('visible');
-   startDea.classList.remove('invisible');
- }
-}
-
-class Dea {
- constructor(sequence) {
-   console.log(sequence);
-
-   const
-     accept = "Zeichenfolge akzeptiert",
-     reject = "Zeichenfolge abgelehnt",
-     error = "Fehler"
-     ;
-
-   this.state = 0;
-   this.finalState = 7;
-   this.response = null;
-
-   if (sequence) {
-     for (const val of sequence) {
-       this.state = this.transition(val);
-       if (this.state === undefined) {
-         console.log(error);
-         this.state = null;
-         return this.state;
-         break;
-       }
-       console.log(`Neuer Status: ${this.state}`);
-     }
-   }
-
-
-   if (this.state === this.finalState) {
-     console.log(accept);
-     this.response = accept;
-     return response;
-   } else {
-     console.log(reject);
-   }
- }
-
- get transitionStates() {
-   return {
-     0: { B: 1 },
-     1: { P: 3, T: 2 },
-     2: { S: 2, X: 4 },
-     3: { T: 3, V: 5 },
-     4: { S: 6, X: 3 },
-     5: { P: 4, V: 6 },
-     6: { E: 7 }
-   };
- }
-
- transition(word) {
-   return this.transitionStates[this.state][word];
- }
->>>>>>> d79575f9598783f4145d1e5e48468898635c76fb
-}
+  console.log(runCount);
+  console.log(errorCount);
+})
 
 /**
 * Getting a number between min and max
 */
 const randomInt = () => {
- return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min);
+  return Math.floor(Math.random() * (Math.floor(max) - Math.ceil(min) + 1)) + Math.ceil(min);
 };
 
 /**
@@ -159,78 +76,14 @@ const randomInt = () => {
 * X is a random number between min and max.
 */
 function getSequence() {
- const
-   n = sigma.length,
-   arr = [],
-   x = randomInt()
-   ;
+  const
+    n = sigma.length,
+    arr = [],
+    x = randomInt()
+    ;
 
- for (let i = 0; i < x; i++) {
-   arr.push(sigma[(0 + Math.floor(Math.random() * n)) % n]);
- }
- return arr;
-}
-
-/* function getBar(obj, state) {
-
- var nextStates = Object.values(obj[state]);
- console.log("next states:" + nextStates);
-
- var counter = 0;
- while (counter <3){
-   for (const next of nextStates) {
-     console.log("Next: " + next);
-     foo = getBar(obj, next);
-   }
- }
-
- // return ";)";
-}
-
-/* function getBar(obj, state) {
-
-  var nextStates = Object.values(obj[state]);
-  console.log("next states:" + nextStates);
-
-  var counter = 0;
-  while (counter <3){
-    for (const next of nextStates) {
-      console.log("Next: " + next);
-      foo = getBar(obj, next);
-    }
+  for (let i = 0; i < x; i++) {
+    arr.push(sigma[(0 + Math.floor(Math.random() * n)) % n]);
   }
-
-  // return ";)";
+  return arr;
 }
-
-(function () {
-<<<<<<< HEAD
-  const foo = new Dea();
-  /*   console.log(foo.transitionStates);
-    console.log(Object.keys(foo.transitionStates));
-    console.log(Object.keys(foo.transitionStates).length);
-    console.log(Object.keys(foo.transitionStates[foo.state]));
-    console.log(Object.values(foo.transitionStates[foo.state]));
-    // var start = Object.keys(foo.transitionStates[0]);
-    */
-   /*
-  var start = 0;
-  const obj = foo.transitionStates;
-  const bar = getBar(obj, start);
-  console.log(bar);
-=======
- const foo = new Dea();
- /*   console.log(foo.transitionStates);
-   console.log(Object.keys(foo.transitionStates));
-   console.log(Object.keys(foo.transitionStates).length);
-   console.log(Object.keys(foo.transitionStates[foo.state]));
-   console.log(Object.values(foo.transitionStates[foo.state]));
-   // var start = Object.keys(foo.transitionStates[0]);
-   */
-  /*
- var start = 0;
- const obj = foo.transitionStates;
- const bar = getBar(obj, start);
- console.log(bar);
->>>>>>> d79575f9598783f4145d1e5e48468898635c76fb
-})(); */
