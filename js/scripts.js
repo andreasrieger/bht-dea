@@ -9,6 +9,56 @@ const
   max = 15
   ;
 
+var seq,
+  runCount = 0,
+  errorCount = 0
+  ;
+
+const btn = document.getElementById('generateSequence');
+const seqOutput = document.getElementById('output');
+const startDea = document.getElementById('startDea');
+const response = document.getElementById('response');
+
+if (btn) {
+  btn.addEventListener('click', function (event) {
+    seq = getSequence();
+    seqOutput.value = seq;
+    startDea.classList.add('visible');
+    startDea.classList.remove('invisible');
+  })
+}
+
+function runProof() {
+  console.log("Game over!");
+  if (window.confirm("Erfolgshungrig?")) {
+    seq = sigmaProof;
+    seqOutput.value = seq;
+    startDea.classList.add('visible');
+    startDea.classList.remove('invisible');
+  }
+}
+
+
+startDea.addEventListener('click', function () {
+  const machine = new Dea(seq);
+  startDea.classList.add('invisible');
+  startDea.classList.remove('visible');
+  // console.log(machine.response);
+  if (machine.state == null) {
+    response.innerText = "Fehler!";
+  } else {
+    response.innerText = "Neuer Status: " + machine.state;
+  }
+  runCount += 1;
+  if (machine.state == null) errorCount += 1;
+  if (errorCount == 3) {
+    runProof();
+    errorCount = 0;
+  }
+  console.log(runCount);
+  console.log(errorCount);
+})
+
 class Dea {
   constructor(sequence) {
     console.log(sequence);
