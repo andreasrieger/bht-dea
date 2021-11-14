@@ -10,25 +10,39 @@ class Dea {
 
         this.state = 0;
         this.finalState = 7;
-        this.response = null;
+        this.errorCount = 0;
+/*         this.response = {
+            0: "invalid",
+            1: "valid"
+        }; */
+        this.result = {
+            0: "failed",
+            1: "passed"
+        };
 
         for (const val of sequence) {
+            const currentState = this.state;
+            const response = {
+                'q': currentState,
+                's': Object.keys(this.transitionStates[this.state]),
+                'r': this.transition(val)
+            };
             this.state = this.transition(val);
             if (this.state === undefined) {
-                console.log(error);
-                break;
+                this.errorCount += 1;
+                return response;
+            } else {
+                console.log(`Neuer Status: ${this.state}`);
+                return response;
             }
-            console.log(`Neuer Status: ${this.state}`);
         }
 
-        if (this.state === this.finalState) {
-            console.log(accept);
-            this.response = accept;
-            return this.response;
-        } else {
-            console.log(reject);
-            this.response = reject;
-            return this.response;
+        if (this.state === this.finalState && this.errorCount == 0) { // dea test passed
+            console.log(this.result[1]);
+            return this.result[1];
+        } else { // dea test failed
+            console.log(this.result[0]);
+            return this.result[0];
         }
     }
 
