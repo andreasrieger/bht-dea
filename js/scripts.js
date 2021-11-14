@@ -37,11 +37,18 @@ if (btn) {
   })
 }
 
+const table = (result) => {
+  const obj = {};
+  for (const row of result) {
+    Object.assign(obj, Object.values(row));
+  }
+  return obj;
+};
 
 testDea.addEventListener('click', () => {
   const result = runProof();
   response.innerText = result[0];
-  transitions.innerText = result[1].transitions;
+  transitions.innerText = table(result[1]);
 })
 
 

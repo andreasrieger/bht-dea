@@ -25,7 +25,7 @@ class Dea {
             const currentState = this.state;
             const response = {
                 0: currentState,
-                1: this.transitionStates[this.state],
+                1: val,
                 2: this.transition(val)
             };
             this.state = this.transition(val);
