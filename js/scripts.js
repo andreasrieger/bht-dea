@@ -15,6 +15,7 @@ var seq,
   ;
 
 const btn = document.getElementById('generateSequence');
+const output = document.getElementById('output');
 const seqOutput = document.getElementById('output');
 const startDea = document.getElementById('startDea');
 const response = document.getElementById('response');
@@ -22,6 +23,7 @@ const response = document.getElementById('response');
 if (btn) {
   btn.addEventListener('click', function (event) {
     seq = getSequence();
+    output.innerText = seq;
     seqOutput.value = seq;
     startDea.classList.add('visible');
     startDea.classList.remove('invisible');
