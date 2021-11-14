@@ -37,10 +37,11 @@ if (btn) {
   })
 }
 
+
 testDea.addEventListener('click', () => {
   const result = runProof();
   response.innerText = result[0];
-  transitions.innerText = result[1];
+  transitions.innerText = result[1].transitions;
 })
 
 
