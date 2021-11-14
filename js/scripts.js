@@ -14,52 +14,15 @@ var seq,
   errorCount = 0
   ;
 
-const btn = document.getElementById('generateSequence');
-const output = document.getElementById('output');
-const seqOutput = document.getElementById('output');
-const startDea = document.getElementById('startDea');
-const response = document.getElementById('response');
 
-if (btn) {
-  btn.addEventListener('click', function (event) {
-    seq = getSequence();
-    output.innerText = seq;
-    seqOutput.value = seq;
-    startDea.classList.add('visible');
-    startDea.classList.remove('invisible');
-  })
-}
-
-function runProof() {
+function runProof(seq) {
   console.log("Game over!");
   if (window.confirm("Erfolgshungrig?")) {
-    seq = sigmaProof;
     seqOutput.value = seq;
     startDea.classList.add('visible');
     startDea.classList.remove('invisible');
   }
 }
-
-
-startDea.addEventListener('click', function () {
-  const machine = new Dea(seq);
-  startDea.classList.add('invisible');
-  startDea.classList.remove('visible');
-  // console.log(machine.response);
-  if (machine.state == null) {
-    response.innerText = "Fehler!";
-  } else {
-    response.innerText = "Neuer Status: " + machine.state;
-  }
-  runCount += 1;
-  if (machine.state == null) errorCount += 1;
-  if (errorCount == 3) {
-    runProof();
-    errorCount = 0;
-  }
-  console.log(runCount);
-  console.log(errorCount);
-})
 
 class Dea {
   constructor(sequence) {
@@ -91,6 +54,8 @@ class Dea {
 
     if (this.state === this.finalState) {
       console.log(accept);
+      this.response = accept;
+      return response;
     } else {
       console.log(reject);
     }
@@ -137,7 +102,34 @@ function getSequence() {
   return arr;
 }
 
+/* function getBar(obj, state) {
+
+  var nextStates = Object.values(obj[state]);
+  console.log("next states:" + nextStates);
+
+  var counter = 0;
+  while (counter <3){
+    for (const next of nextStates) {
+      console.log("Next: " + next);
+      foo = getBar(obj, next);
+    }
+  }
+
+  // return ";)";
+}
+
 (function () {
   const foo = new Dea();
-  console.log(foo.transitionStates);
-})();
+  /*   console.log(foo.transitionStates);
+    console.log(Object.keys(foo.transitionStates));
+    console.log(Object.keys(foo.transitionStates).length);
+    console.log(Object.keys(foo.transitionStates[foo.state]));
+    console.log(Object.values(foo.transitionStates[foo.state]));
+    // var start = Object.keys(foo.transitionStates[0]);
+    */
+   /*
+  var start = 0;
+  const obj = foo.transitionStates;
+  const bar = getBar(obj, start);
+  console.log(bar);
+})(); */
