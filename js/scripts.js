@@ -75,16 +75,19 @@ class Dea {
     this.finalState = 7;
     this.response = null;
 
-    for (const val of sequence) {
-      this.state = this.transition(val);
-      if (this.state === undefined) {
-        console.log(error);
-        this.state = null;
-        return this.state;
-        break;
+    if (sequence) {
+      for (const val of sequence) {
+        this.state = this.transition(val);
+        if (this.state === undefined) {
+          console.log(error);
+          this.state = null;
+          return this.state;
+          break;
+        }
+        console.log(`Neuer Status: ${this.state}`);
       }
-      console.log(`Neuer Status: ${this.state}`);
     }
+
 
     if (this.state === this.finalState) {
       console.log(accept);
@@ -134,7 +137,7 @@ function getSequence() {
   return arr;
 }
 
-(function (){
+(function () {
   const foo = new Dea();
   console.log(foo.transitionStates);
 })();
