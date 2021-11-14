@@ -1,4 +1,4 @@
-export class Dea {
+class Dea {
     constructor(sequence) {
         console.log(sequence);
 
