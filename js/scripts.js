@@ -16,9 +16,7 @@ var seq,
 
 
 function runProof() {
-  seqOutput.value = seqProof;
-  startDea.classList.add('visible');
-  startDea.classList.remove('invisible');
+  return new Dea(seqProof);
 }
 
 const btn = document.getElementById('generateSequence');
