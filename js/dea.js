@@ -5,16 +5,17 @@ class Dea {
         const
             accept = "Zeichenfolge akzeptiert",
             reject = "Zeichenfolge abgelehnt",
-            error = "Fehler"
+            error = "Fehler",
+            transitions = []
             ;
 
         this.state = 0;
         this.finalState = 7;
         this.errorCount = 0;
-/*         this.response = {
-            0: "invalid",
-            1: "valid"
-        }; */
+        /*         this.response = {
+                    0: "invalid",
+                    1: "valid"
+                }; */
         this.result = {
             0: "failed",
             1: "passed"
@@ -23,26 +24,35 @@ class Dea {
         for (const val of sequence) {
             const currentState = this.state;
             const response = {
-                'q': currentState,
-                's': Object.keys(this.transitionStates[this.state]),
-                'r': this.transition(val)
+                0: currentState,
+                1: Object.keys(this.transitionStates[this.state]),
+                2: this.transition(val)
             };
             this.state = this.transition(val);
             if (this.state === undefined) {
                 this.errorCount += 1;
-                return response;
+                response[2] = null;
+                transitions.push(response);
+                // return response; // Schleife wird nach einem Durchlauf verlassen
             } else {
                 console.log(`Neuer Status: ${this.state}`);
-                return response;
+                transitions.push(response);
+                // return response; // Schleife wird nach einem Durchlauf verlassen
             }
         }
 
         if (this.state === this.finalState && this.errorCount == 0) { // dea test passed
             console.log(this.result[1]);
-            return this.result[1];
+            return {
+                0: this.result[1],
+                1: transitions
+            };
         } else { // dea test failed
             console.log(this.result[0]);
-            return this.result[0];
+            return {
+                0: this.result[0],
+                1: transitions
+            };
         }
     }
 

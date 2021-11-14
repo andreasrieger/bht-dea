@@ -25,6 +25,7 @@ const seqOutput = document.getElementById('output');
 const startDea = document.getElementById('startDea');
 const testDea = document.getElementById('testDea');
 const response = document.getElementById('response');
+const transitions = document.getElementById('transitions');
 
 if (btn) {
   btn.addEventListener('click', function (event) {
@@ -38,7 +39,8 @@ if (btn) {
 
 testDea.addEventListener('click', () => {
   const result = runProof();
-  response.innerText = result.response;
+  response.innerText = result[0];
+  transitions.innerText = result[1];
 })
 
 
