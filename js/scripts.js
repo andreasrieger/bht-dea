@@ -19,6 +19,11 @@ const startDea = document.getElementById('startDea');
 const testDea = document.getElementById('testDea');
 const response = document.getElementById('response');
 const transitions = document.getElementById('transitions');
+const sigmaPlaceholder = document.getElementsByClassName('sigmaPlaceholder');
+
+if (sigmaPlaceholder) {
+  sigmaPlaceholder.innerText = sigma.toString();
+}
 
 
 if (genSeq) {
@@ -28,12 +33,12 @@ if (genSeq) {
   })
 }
 
-function cleanOutput(element){
+function cleanOutput(element) {
   element.innerText = "";
   element.innerHTML = "";
-} 
+}
 
-function table(result) {
+function formatOutput(result) {
   var arr = [];
   Object.entries(result).map(item => {
     arr.push(`<li>${Object.values(item[1])}</li>`);
@@ -41,6 +46,14 @@ function table(result) {
   return arr; // To do: formatting output
 }
 
+function runSequence(valid, output) {
+  if (valid) {
+    response.innerText = "valid";
+  } else {
+    response.innerText = "invalid";
+  }
+  transitions.innerText = formatOutput(output);
+}
 
 testDea.addEventListener('click', () => {
   cleanOutput(transitions);
@@ -48,26 +61,22 @@ testDea.addEventListener('click', () => {
   const machine = new Dea(proof);
   if (machine[1]) response.innerText = valid;
   else response.innerText = invalid;
-  transitions.innerHTML = table(machine[1]);
+  transitions.innerHTML = formatOutput(machine[1]);
 })
 
 
 startDea.addEventListener('click', (event) => {
-  // cleanOutput(transitions);
-  // cleanOutput(response);
+  cleanOutput(transitions);
+  cleanOutput(response);
   console.log(`seqInput: ${seqInput.value}`);
   // To do: check if empty
   // To do: add commas to string
   // To do: check string for compatibility with $sigma
   // To do: running sequence according to the settings (auto, auto delayed, step by step)
   const machine = new Dea(seqInput.value); //sequence comes from form
-  if (machine[0]) {
-    response.innerText = valid;
-    transitions.innerText = table(machine[1]);
-  }
+  if (machine[0]) runSequence(machine[0], machine[1]);
   else {
-    response.innerText = invalid;
-    transitions.innerText = table(machine[1]);
+    runSequence(machine[0], machine[1]);
     errorCount += 1;
   }
   if (errorCount == 3) {
