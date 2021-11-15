@@ -38,13 +38,13 @@ if (genSeq) {
 }
 
 
-const table = (result) => {
+function table(result) {
   var arr = [];
   Object.entries(result).map(item => {
     arr.push(`<li>${Object.values(item[1])}</li>`);
-  })
+  });
   return arr; // To do: formatting output
-};
+}
 
 
 testDea.addEventListener('click', () => {

@@ -1,20 +1,5 @@
-const table = (result) => {
-    var arr = [];
-    Object.entries(result).map(item => {
-        arr.push(Object.values(item[1]));
-    })
-    return arr;
-};
+function getSigmaString(sigma){
+    console.log(sigma.toString());
+}
 
-(() => {
-    const response = [{
-        0: 0,
-        1: "B",
-        2: 1
-    }, {
-        0: 1,
-        1: "P",
-        2: 3
-    }];
-    console.log(table(response));
-})();
+getSigmaString(['B', 'E', 'P', 'S', 'T', 'V', 'X']);
