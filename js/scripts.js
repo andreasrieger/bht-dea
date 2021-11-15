@@ -55,8 +55,8 @@ testDea.addEventListener('click', () => {
 
 
 startDea.addEventListener('click', (event) => {
-  cleanOutput(transitions);
-  cleanOutput(response);
+  // cleanOutput(transitions);
+  // cleanOutput(response);
   console.log(`seqInput: ${seqInput.value}`);
   // To do: check if empty
   // To do: add commas to string
