@@ -7,10 +7,6 @@ class Dea {
         this.finalState = 7;
         this.errorCount = 0;
         this.transitions = [];
-        this.result = {
-            0: "failed",
-            1: "passed"
-        };
 
         for (const val of sequence) {
             const currentState = this.state;
@@ -33,15 +29,15 @@ class Dea {
         }
 
         if (this.state === this.finalState && this.errorCount == 0) { // dea test passed
-            console.log(this.result[1]);
+            console.log(true);
             return {
-                0: this.result[1],
+                0: true,
                 1: transitions
             };
         } else { // dea test failed
-            console.log(this.result[0]);
+            console.log(false);
             return {
-                0: this.result[0],
+                0: false,
                 1: transitions
             };
         }
