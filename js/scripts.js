@@ -20,6 +20,7 @@ const testDea = document.getElementById('testDea');
 const response = document.getElementById('response');
 const transitions = document.getElementById('transitions');
 const sigmaPlaceholder = document.getElementsByClassName('sigmaPlaceholder');
+const stategraph = document.getElementById('stategraph');
 
 if (sigmaPlaceholder) {
   sigmaPlaceholder.innerText = sigma.toString();
@@ -49,6 +50,7 @@ function formatOutput(result) {
 function runSequence(valid, output) {
   if (valid) {
     response.innerText = "valid";
+    stategraph.classList.replace("invisible", "visible");
   } else {
     response.innerText = "invalid";
   }
