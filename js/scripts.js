@@ -22,10 +22,6 @@ const transitions = document.getElementById('transitions');
 const placeholderSigma = document.getElementsByClassName("placeholderSigma");
 
 
-if (document) {
-  placeholderSigma.innerText = sigma.toString();
-}
-
 
 if (genSeq) {
   genSeq.addEventListener('click', () => {
@@ -34,6 +30,10 @@ if (genSeq) {
   })
 }
 
+function cleanOutput(element){
+  element.innerText = "";
+  element.innerHTML = "";
+} 
 
 function table(result) {
   var arr = [];
@@ -45,6 +45,8 @@ function table(result) {
 
 
 testDea.addEventListener('click', () => {
+  cleanOutput(transitions);
+  cleanOutput(response);
   const machine = new Dea(proof);
   if (machine[1]) response.innerText = valid;
   else response.innerText = invalid;
@@ -53,6 +55,8 @@ testDea.addEventListener('click', () => {
 
 
 startDea.addEventListener('click', (event) => {
+  cleanOutput(transitions);
+  cleanOutput(response);
   console.log(`seqInput: ${seqInput.value}`);
   // To do: check if empty
   // To do: add commas to string
