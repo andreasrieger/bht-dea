@@ -20,7 +20,7 @@ const startDea = document.getElementById('startDea');
 const testDea = document.getElementById('testDea');
 const response = document.getElementById('response');
 const transitions = document.getElementById('transitions');
-const placeholderSigma = document.querySelectorAll("sigma");
+const placeholderSigma = document.querySelectorAll("placeholderSigma");
 
 
 if (start) {
