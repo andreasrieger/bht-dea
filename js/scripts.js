@@ -12,7 +12,6 @@ const
 var errorCount = 0;
 
 
-const start = document.getElementById('start');
 const genSeq = document.getElementById('generateSequence');
 const output = document.getElementById('output');
 const seqInput = document.getElementById('seqInput');
@@ -20,13 +19,11 @@ const startDea = document.getElementById('startDea');
 const testDea = document.getElementById('testDea');
 const response = document.getElementById('response');
 const transitions = document.getElementById('transitions');
-const placeholderSigma = document.querySelectorAll("placeholderSigma");
+const placeholderSigma = document.getElementsByClassName("placeholderSigma");
 
 
-if (start) {
-  start.addEventListener('click', () => {
-    placeholderSigma.innerText = sigma.toString();
-  })
+if (document) {
+  placeholderSigma.innerText = sigma.toString();
 }
 
 
