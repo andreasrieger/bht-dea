@@ -20,12 +20,12 @@ const startDea = document.getElementById('startDea');
 const testDea = document.getElementById('testDea');
 const response = document.getElementById('response');
 const transitions = document.getElementById('transitions');
-const sigma = document.querySelectorAll("sigma");
+const placeholderSigma = document.querySelectorAll("sigma");
 
 
 if (start) {
   start.addEventListener('click', () => {
-    sigma.innerText = sigma.toString();
+    placeholderSigma.innerText = sigma.toString();
   })
 }
 
