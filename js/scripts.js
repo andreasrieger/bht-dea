@@ -33,7 +33,7 @@ const table = (result) => {
   Object.entries(result).map(item => {
     arr.push(Object.values(item[1]));
   })
-  return arr;
+  return arr; // To do: formatting output
 };
 
 
@@ -47,8 +47,10 @@ testDea.addEventListener('click', () => {
 
 startDea.addEventListener('click', (event) => {
   console.log(`seqInput: ${seqInput.value}`);
+  // To do: check if empty
   // To do: add commas to string
   // To do: check string for compatibility with $sigma
+  // To do: running sequence according to the settings (auto, auto delayed, step by step)
   const machine = new Dea(seqInput.value); //sequence comes from form
   if (machine[0]) {
     response.innerText = valid;
