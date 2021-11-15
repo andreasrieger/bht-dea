@@ -8,9 +8,8 @@ class Dea {
         this.errorCount = 0;
 
         for (const val of sequence) {
-            const currentState = this.state;
             const response = {
-                0: currentState,
+                0: this.state,
                 1: val,
                 2: this.transition(val)
             };
