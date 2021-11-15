@@ -12,6 +12,7 @@ const
 var errorCount = 0;
 
 
+const start = document.getElementById('start');
 const genSeq = document.getElementById('generateSequence');
 const output = document.getElementById('output');
 const seqInput = document.getElementById('seqInput');
@@ -19,6 +20,15 @@ const startDea = document.getElementById('startDea');
 const testDea = document.getElementById('testDea');
 const response = document.getElementById('response');
 const transitions = document.getElementById('transitions');
+const sigma = document.querySelectorAll("sigma");
+
+
+if (start) {
+  start.addEventListener('click', () => {
+    sigma.innerText = sigma.toString();
+  })
+}
+
 
 if (genSeq) {
   genSeq.addEventListener('click', () => {
@@ -31,7 +41,7 @@ if (genSeq) {
 const table = (result) => {
   var arr = [];
   Object.entries(result).map(item => {
-    arr.push(Object.values(item[1]));
+    arr.push(`<li>${Object.values(item[1])}</li>`);
   })
   return arr; // To do: formatting output
 };
@@ -41,7 +51,7 @@ testDea.addEventListener('click', () => {
   const machine = new Dea(proof);
   if (machine[1]) response.innerText = valid;
   else response.innerText = invalid;
-  transitions.innerText = table(machine[1]);
+  transitions.innerHTML = table(machine[1]);
 })
 
 

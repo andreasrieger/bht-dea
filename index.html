@@ -8,7 +8,7 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <title>Finite state machine (DEA) embedding Reber Grammar</title>
   <link rel="stylesheet" href="css/styles.css">
- 
+
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     <nav class="navbar sticky-top navbar-light bg-light">
       <div class="container-fluid">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" id="start" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
           Start
         </button>
         <button type="button" id="testDea" class="btn btn-primary">
@@ -31,8 +31,8 @@
     <div class="row">
       <div class="col">
         <h1>Tabelle mit Zuständen</h1>
-    <p id="transitions"></p>
-  </div>
+        <ul id="transitions"></ul>
+      </div>
       <div class="col">
         <h1>Zustandsgraph</h1>
         <p id="response"></p>
@@ -43,27 +43,31 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
+            <h5 class="modal-title">Zeichenfolge eingeben</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Modal body text goes here.</p>
+            <p>Geben Sie eine beliebige Folge mit mindestens 5 der folgenden Zeichen ein: <span class="sigma fw-bold"></span></p>
             <div class="row">
-              <div class="col">
-                <div class="input-group mb-3">
-                  <input type="text" id="seqInput" class="form-control" value="" placeholder="Zeichenfolge, z.B.: B, P, V, V, E"
-                    aria-label="Zeichenfolge, z.B.: B, P, V, V, E" aria-describedby="generateSequence">
-                  <button class="btn btn-outline-secondary" type="button" id="generateSequence">Zeichenfolge
-                    erstellen</button>
+              <form class="row g-3 needs-validation" novalidate>
+                <div class="col-auto">
+                  <div class="input-group mb-3">
+                    <input type="text" id="seqInput" class="form-control" value=""
+                      placeholder="Zeichenfolge, z.B.: B, P, V, V, E" aria-label="Zeichenfolge, z.B.: B, P, V, V, E"
+                      aria-describedby="generateSequence">
+                    <button class="btn btn-outline-secondary" type="button" id="generateSequence">Zufällige Zeichenfolge
+                      erstellen</button>
+                  </div>
                 </div>
-              </div>
-              <div class="col">
-                <p>oder</p>
-                <button type="submit" id="startDea" class="btn btn-primary mb-3" data-bs-dismiss="modal">Starte
-                  Automaten</button>
-              </div>
+                <div class="col-auto">
+                  <p>oder</p>
+                </div>
+                <div class="col-auto">
+                  <button type="submit" id="startDea" class="btn btn-primary mb-3" data-bs-dismiss="modal">Starte
+                    Automaten</button>
+                </div>
+              </form>
             </div>
-
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
