@@ -2,11 +2,10 @@ class Dea {
     constructor(sequence) {
         console.log(sequence);
 
-        // const transitions = [];
+        const transitions = [];
         this.state = 0;
         this.finalState = 7;
         this.errorCount = 0;
-        this.transitions = [];
 
         for (const val of sequence) {
             const currentState = this.state;

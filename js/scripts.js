@@ -46,9 +46,8 @@ testDea.addEventListener('click', () => {
 
 
 startDea.addEventListener('click', () => {
-  console.log(data);
   console.log(`seqInput: ${seqInput}`);
-  const machine = new Dea(data); //sequence comes from form
+  const machine = new Dea(seqInput); //sequence comes from form
   if (machine[1]) response.innerText = valid;
   else {
     response.innerText = invalid;
