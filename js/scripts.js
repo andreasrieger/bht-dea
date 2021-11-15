@@ -50,9 +50,13 @@ startDea.addEventListener('click', (event) => {
   // To do: add commas to string
   // To do: check string for compatibility with $sigma
   const machine = new Dea(seqInput.value); //sequence comes from form
-  if (machine[1]) response.innerText = valid;
+  if (machine[1]) {
+    response.innerText = valid;
+    transitions.innerText = table(machine[1]);
+  }
   else {
     response.innerText = invalid;
+    transitions.innerText = table(machine[1]);
     errorCount += 1;
   }
   if (errorCount == 3) {

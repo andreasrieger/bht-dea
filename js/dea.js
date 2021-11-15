@@ -25,7 +25,7 @@ class Dea {
                 };
                 // break; // Schleife wird verlassen
             } else {
-                console.log(`Neuer Status: ${this.state}`);
+                console.log(`New State: ${this.state}`);
                 transitions.push(response);
                 console.log(transitions);
             }
