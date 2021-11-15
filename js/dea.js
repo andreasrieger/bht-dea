@@ -19,7 +19,11 @@ class Dea {
                 this.errorCount += 1;
                 response[2] = null;
                 transitions.push(response);
-                break; // Schleife wird verlassen
+                return {
+                    0: false,
+                    1: transitions
+                };
+                // break; // Schleife wird verlassen
             } else {
                 console.log(`Neuer Status: ${this.state}`);
                 transitions.push(response);
