@@ -16,9 +16,11 @@ class Dea {
             };
             this.state = this.transition(val);
             if (this.state === undefined) {
+                this.state = "unknown";
                 this.errorCount += 1;
                 response[2] = null;
                 transitions.push(response);
+                console.log(`Fehler. Status: ${this.state}`);
                 return {
                     0: false,
                     1: transitions
