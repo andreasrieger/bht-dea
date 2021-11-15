@@ -55,9 +55,6 @@ testDea.addEventListener('click', () => {
 
 startDea.addEventListener('click', function () {
   const machine = new Dea(seq);
-  startDea.classList.add('invisible');
-  startDea.classList.remove('visible');
-  // console.log(machine.response);
   if (machine.state == null) {
     response.innerText = "Fehler!";
   } else {
@@ -96,3 +93,6 @@ function getSequence() {
   }
   return arr;
 }
+
+
+// @Todo: develop a generator for valid sequences

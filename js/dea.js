@@ -2,20 +2,11 @@ class Dea {
     constructor(sequence) {
         console.log(sequence);
 
-        const
-            accept = "Zeichenfolge akzeptiert",
-            reject = "Zeichenfolge abgelehnt",
-            error = "Fehler",
-            transitions = []
-            ;
-
+        // const transitions = [];
         this.state = 0;
         this.finalState = 7;
         this.errorCount = 0;
-        /*         this.response = {
-                    0: "invalid",
-                    1: "valid"
-                }; */
+        this.transitions = [];
         this.result = {
             0: "failed",
             1: "passed"
@@ -33,12 +24,11 @@ class Dea {
                 this.errorCount += 1;
                 response[2] = null;
                 transitions.push(response);
-                // return response; // Schleife wird nach einem Durchlauf verlassen
+                break; // Schleife wird verlassen
             } else {
                 console.log(`Neuer Status: ${this.state}`);
                 transitions.push(response);
                 console.log(transitions);
-                // return response; // Schleife wird nach einem Durchlauf verlassen
             }
         }
 
