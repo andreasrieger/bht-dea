@@ -45,8 +45,10 @@ testDea.addEventListener('click', () => {
 })
 
 
-startDea.addEventListener('click', () => {
+startDea.addEventListener('click', (event) => {
   console.log(`seqInput: ${seqInput}`);
+  // To do: add commas to string
+  // To do: check string for compatibility with $sigma
   const machine = new Dea(seqInput); //sequence comes from form
   if (machine[1]) response.innerText = valid;
   else {
