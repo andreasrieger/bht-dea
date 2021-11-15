@@ -54,7 +54,7 @@ function formatOutput(result) {
 function runSequence(valid, output) {
   if (valid) {
     response.innerText = "valid";
-    stategraph.classList.toggle("invisible");
+    stategraph.classList.replace("invisible", "visible");
     if (stepbystep) {
       var i = 0;
       stepbystep.addEventListener('click', (i) => {
