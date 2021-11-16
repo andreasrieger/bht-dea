@@ -68,15 +68,11 @@ function runSequence(valid, output) {
 
 testDea.addEventListener('click', () => {
   const machine = new Dea(proof);
-  if (machine[1]) runSequence(machine[0], machine[1]);
-  else runSequence(machine[0], machine[1]);
-  transitions.innerHTML = formatOutput(machine[1]);
+  runSequence(machine[0], machine[1]);
 })
 
 
 startDea.addEventListener('click', (event) => {
-  cleanOutput(transitions);
-  cleanOutput(response);
   console.log(`seqInput: ${seqInput.value}`);
   // To do: check if empty
   // To do: add commas to string
