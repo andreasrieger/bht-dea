@@ -42,7 +42,7 @@ function formatOutput(output) {
 </tr>
  */
   Object.entries(output).map(item => {
-    arr.push('<td>' + Object.values(item[1]) + '</td>');
+    arr.push('<td>' + Object.values(item) + '</td>');
   });
   return '<tr>' + arr + '</tr>'; // To do: formatting output
 }
