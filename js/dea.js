@@ -8,40 +8,31 @@ class Dea {
         this.errorCount = 0;
 
         for (const val of sequence) {
-            const response = {
-                0: this.state,
-                1: val,
-                2: this.transition(val)
-            };
+            const response = [
+                this.state,
+                val,
+                this.transition(val)
+            ];
             this.state = this.transition(val);
             if (this.state === undefined) {
                 console.log(`Error: Status unknown`);
                 this.errorCount += 1;
-                response[2] = "Error";
+                response[2] = -1;
                 transitions.push(response);
-                return {
-                    0: false,
-                    1: transitions
-                };
+                return [false, transitions];
             } else {
                 console.log(`New State: ${this.state}`);
                 transitions.push(response);
-                console.log(transitions);
+                // console.log(transitions);
             }
         }
 
         if (this.state === this.finalState && this.errorCount == 0) { // dea test passed
             console.log(true);
-            return {
-                0: true,
-                1: transitions
-            };
+            return [true, transitions];
         } else { // dea test failed
             console.log(false);
-            return {
-                0: false,
-                1: transitions
-            };
+            return [false, transitions];
         }
     }
 
