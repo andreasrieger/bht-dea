@@ -32,18 +32,14 @@ if (genSeq) {
 
 
 
-function formatOutput(output) {
-  var arr = ['<th scope="row">1</th>'];
-  /*<tr>
-   <th scope="row">1</th>
-  <td>Mark</td>
-  <td>Otto</td>
-  <td>@mdo</td>
-</tr>
- */
-  Object.entries(output).map(item => {
+function formatOutput(row, rowNum) {
+  var arr = [`<th scope="row">${rowNum}</th>`];
+  for (const element of row){
+    arr.push('<td>' + element + '</td>');
+  }
+ /*  Object.entries(output).map(item => {
     arr.push('<td>' + Object.values(item) + '</td>');
-  });
+  }); */
   return '<tr>' + arr + '</tr>'; // To do: formatting output
 }
 
@@ -52,7 +48,7 @@ function runStateGraph(output, delay){
     for (let i = 0, l = output.length; i < l; i++) {
       setTimeout((y) => { 
         console.log(output[y]);
-        transitionsTable.innerHTML = formatOutput(output[y]);
+        transitionsTable.innerHTML = formatOutput(output[y], y+=1);
       }, i * delay * 1000, i);
     }
 }
