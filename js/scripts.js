@@ -21,7 +21,7 @@ const response = document.getElementById('response');
 const transitions = document.getElementById('transitions');
 const sigmaPlaceholder = document.getElementsByClassName('sigmaPlaceholder');
 const stategraph = document.getElementById('stategraph');
-const stepbystep = document.getElementById('stepbystep');
+
 
 if (sigmaPlaceholder) {
   sigmaPlaceholder.innerText = sigma.toString();
@@ -54,18 +54,14 @@ function formatOutput(result) {
 function runSequence(valid, output) {
   if (valid) {
     response.innerText = "valid";
-    stategraph.classList.remove("invisible");
-    stategraph.classList.add("visible");
+    const stepbystep = document.getElementById('stepbystep');
     if (stepbystep) {
-      var i = 0;
-      stepbystep.addEventListener('click', (i) => {
-        if (i < output.length) {
-          response.innerText = output[i];
+      for (let i = 0; i < output.length;) {
+        response.innerText = output[i];
+        stepbystep.addEventListener('click', () => {
           i += 1;
-        } else {
-          response.innerText = "Ende";
-        }
-      })
+        }) 
+      }
     }
   } else {
     response.innerText = "invalid";
