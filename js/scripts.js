@@ -61,7 +61,7 @@ function runSequence(valid, output) {
   const oneSecondDelay = document.getElementById("1s");
   const twoSecondDelay = document.getElementById("2s");
   const fourSecondDelay = document.getElementById("4s");
-  oneSecondDelay.addEventListener('click', runStateGraph(output, 1));
+  oneSecondDelay.addEventListener('click', () => { runStateGraph(output, 1); });
   // twoSecondDelay.addEventListener('click', runStateGraph(output, 2));
   // fourSecondDelay.addEventListener('click', runStateGraph(output, 4));
 }
