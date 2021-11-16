@@ -48,7 +48,7 @@ function runStateGraph(output, delay){
     for (let i = 0, l = output.length; i < l; i++) {
       setTimeout((y) => { 
         console.log(output[y]);
-        transitionsTable.innerHTML = formatOutput(output[y], y+=1);
+        transitionsTable.append = formatOutput(output[y], y+=1);
       }, i * delay * 1000, i);
     }
 }
@@ -62,7 +62,7 @@ function runSequence(valid, output) {
   // fourSecondDelay.addEventListener('click', runStateGraph(output, 4));
 }
 
-testDea.addEventListener('click', () => {
+testDea.addEventListener('click', () => {//fire button twice doubles the console output
   const machine = new Dea(proof);
   if (machine[0]) runSequence(machine[0], machine[1]);
 })
