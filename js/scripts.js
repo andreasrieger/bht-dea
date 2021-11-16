@@ -32,11 +32,6 @@ if (genSeq) {
 
 
 
-function cleanOutput(element) {
-  element.innerText = "";
-  element.innerHTML = "";
-}
-
 function formatOutput(output) {
   var arr = ['<th scope="row">1</th>'];
   /*<tr>
@@ -72,8 +67,6 @@ function runSequence(valid, output) {
 }
 
 testDea.addEventListener('click', () => {
-  cleanOutput(transitions);
-  cleanOutput(response);
   const machine = new Dea(proof);
   if (machine[1]) runSequence(machine[0], machine[1]);
   else runSequence(machine[0], machine[1]);
