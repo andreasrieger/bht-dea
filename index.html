@@ -31,7 +31,18 @@
     <div class="row">
       <div class="col">
         <h1>Tabelle mit Zuständen</h1>
-        <ul id="transitions"></ul>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Q</th>
+              <th scope="col">&#931;</th>
+              <th scope="col">Q</th>
+            </tr>
+          </thead>
+          <tbody id="transitionsTable">
+          </tbody>
+        </table>
       </div>
       <div class="col">
         <h1>Zustandsgraph</h1>
@@ -41,19 +52,19 @@
             <h5 class="card-title">Deterministischer Endlicher Automat</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             <div class="row">
-              <div class="col-auto"><button type="button" id="startAuto" class="btn btn-primary">Schnelldurchlauf</a></div>
-              <div class="col-auto"><button type="button" id="startAutoDelayed" class="btn btn-primary"></a></div>
+              <div class="col-auto"><button type="button" id="startAuto" class="btn btn-primary">Schnelldurchlauf</button></div>
+              <div class="col-auto"><button type="button" id="startAutoDelayed" class="btn btn-primary"></button></div>
                 <div class="dropdown">
                   <button class="btn btn-primary dropdown-toggle" type="button" id="startAutoDelayed" data-bs-toggle="dropdown" aria-expanded="false">
                     Starte Animation mit Intervall von...
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="startAutoDelayed">
                     <li><a class="dropdown-item" id="1s">1 Sekunde</a></li>
-                    <li><a class="dropdown-item" href="#">2 Sekunden</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><a class="dropdown-item" id="2s">2 Sekunden</a></li>
+                    <li><a class="dropdown-item" id="4s">2 Sekunden</a></li>
                   </ul>
                 </div>
-              <div class="col-auto"><button type="button" id="startStepByStep" class="btn btn-primary">Schritt für Schritt</a></div>
+              <div class="col-auto"><button type="button" id="startStepByStep" class="btn btn-primary">Schritt für Schritt</button></div>
             </div>
           </div>
         </div>

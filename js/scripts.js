@@ -23,11 +23,6 @@ const sigmaPlaceholder = document.getElementsByClassName('sigmaPlaceholder');
 const stategraph = document.getElementById('stategraph');
 
 
-if (sigmaPlaceholder) {
-  sigmaPlaceholder.innerText = sigma.toString();
-}
-
-
 if (genSeq) {
   genSeq.addEventListener('click', () => {
     const sequence = getRandomSequence();
@@ -42,38 +37,38 @@ function cleanOutput(element) {
   element.innerHTML = "";
 }
 
-function formatOutput(result) {
-  var arr = [];
-  Object.entries(result).map(item => {
-    arr.push(`<li>${Object.values(item[1])}</li>`);
+function formatOutput(output) {
+  var arr = ['<th scope="row">1</th>'];
+  /*<tr>
+   <th scope="row">1</th>
+  <td>Mark</td>
+  <td>Otto</td>
+  <td>@mdo</td>
+</tr>
+ */
+  Object.entries(output).map(item => {
+    arr.push(`<td>${Object.values(item[1])}</td>`);
   });
-  return arr; // To do: formatting output
+  return '<tr>' + arr + '</tr>'; // To do: formatting output
 }
 
+function runStateGraph(output, delay){
+    // auto delayed
+    for (let i = 0, l = output.length; i < l; i++) {
+      setTimeout((y) => { 
+        console.log(output[y]);
+        transitions.innerText = formatOutput(output[y]);
+      }, i * delay * 1000, i);
+    }
+}
 
 function runSequence(valid, output) {
   const oneSecondDelay = document.getElementById("1s");
-  oneSecondDelay.addEventListener('click', () => { // auto delayed
-    for (let i = 0, l = output.length; i < l; i++) {
-      setTimeout((y) => { console.log(output[y]) }, i * 1000, i);
-    }
-  });
-  
-  if (valid) {
-    response.innerText = "valid";
-    const stepbystep = document.getElementById('stepbystep');
-    if (stepbystep) {
-      for (let i = 0; i < output.length;) {
-        response.innerText = output[i];
-        stepbystep.addEventListener('click', () => {
-          i += 1;
-        })
-      }
-    }
-  } else {
-    response.innerText = "invalid";
-  }
-  transitions.innerText = formatOutput(output);
+  const twoSecondDelay = document.getElementById("2s");
+  const fourSecondDelay = document.getElementById("3s");
+  oneSecondDelay.addEventListener('click', runStateGraph(output, 1));
+  twoSecondDelay.addEventListener('click', runStateGraph(output, 2));
+  fourSecondDelay.addEventListener('click', runStateGraph(output, 4));
 }
 
 testDea.addEventListener('click', () => {
