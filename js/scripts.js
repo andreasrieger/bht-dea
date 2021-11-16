@@ -52,10 +52,10 @@ function formatOutput(result) {
 
 
 function runSequence(valid, output) {
-  const autoDelayed = document.getElementById("startAutoDelayed");
-  autoDelayed.addEventListener('click', () => { // auto delayed
+  const oneSecondDelay = document.getElementById("1s");
+  oneSecondDelay.addEventListener('click', () => { // auto delayed
     for (let i = 0, l = output.length; i < l; i++) {
-      setTimeout((y) => { console.log(output[y]) }, i * 2000, i);
+      setTimeout((y) => { console.log(output[y]) }, i * 1000, i);
     }
   });
   
