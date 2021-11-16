@@ -73,8 +73,8 @@ testDea.addEventListener('click', () => {
   cleanOutput(transitions);
   cleanOutput(response);
   const machine = new Dea(proof);
-  if (machine[1]) response.innerText = valid;
-  else response.innerText = invalid;
+  if (machine[1]) runSequence(machine[0], machine[1]);
+  else runSequence(machine[0], machine[1]);
   transitions.innerHTML = formatOutput(machine[1]);
 })
 
