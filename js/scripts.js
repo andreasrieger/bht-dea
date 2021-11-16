@@ -51,13 +51,14 @@ function formatOutput(result) {
 }
 
 
-function runSequence(valid, output, mode) {
-  if (mode == 2)// auto delayed
-  {
-    for (let i = 0, l = output.length; i<l, i++){
-      setTimeout((y) => { console.log(`runDelayed(${y}): ${output[y]}`) }, i * 2000, i);
+function runSequence(valid, output) {
+  const autoDelayed = document.getElementById("startAutoDelayed");
+  autoDelayed.addEventListener('click', () => { // auto delayed
+    for (let i = 0, l = output.length; i < l; i++) {
+      setTimeout((y) => { console.log(output[y]) }, i * 2000, i);
     }
-  }
+  });
+  
   if (valid) {
     response.innerText = "valid";
     const stepbystep = document.getElementById('stepbystep');
@@ -66,7 +67,7 @@ function runSequence(valid, output, mode) {
         response.innerText = output[i];
         stepbystep.addEventListener('click', () => {
           i += 1;
-        }) 
+        })
       }
     }
   } else {
@@ -94,7 +95,7 @@ startDea.addEventListener('click', (event) => {
   // To do: check string for compatibility with $sigma
   // To do: running sequence according to the settings (auto, auto delayed, step by step)
   const machine = new Dea(seqInput.value); //sequence comes from form
-  if (machine[0]) runSequence(machine[0], machine[1], 2);
+  if (machine[0]) runSequence(machine[0], machine[1]);
   else {
     runSequence(machine[0], machine[1]);
     errorCount += 1;
