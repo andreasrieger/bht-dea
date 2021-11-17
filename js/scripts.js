@@ -29,38 +29,6 @@ if (genSeq) {
   })
 }
 
-
-
-function printStateTable(row, rowNum) {
-  const transitions = document.getElementById('transitionsTable');
-  const tr = document.createElement('tr');
-  const arr = [`<th scope="row">${rowNum}</th>`];
-  for (const element of row) {
-    arr.push(`<td>${element}</td>`);
-  }
-  tr.appendChild(arr);
-  transitions.appendChild(tr);
-}
-
-function runStateGraph(output, delay) {
-  // auto delayed
-  for (let i = 0, l = output.length; i < l; i++) {
-    setTimeout((y) => {
-      console.log(output[y]);
-      printStateTable(output[y], y += 1);
-    }, i * delay * 1000, i);
-  }
-}
-
-function runSequence(valid, output) {
-  const oneSecondDelay = document.getElementById("1s");
-  const twoSecondDelay = document.getElementById("2s");
-  const fourSecondDelay = document.getElementById("4s");
-  oneSecondDelay.addEventListener('click', () => { runStateGraph(output, 1); });
-  twoSecondDelay.addEventListener('click', () => { runStateGraph(output, 2); });
-  fourSecondDelay.addEventListener('click', () => { runStateGraph(output, 4); });
-}
-
 testDea.addEventListener('click', () => {//fire button twice doubles the console output
   const machine = new Dea(proof);
   if (machine[0]) runSequence(machine[0], machine[1]);
@@ -84,6 +52,48 @@ startDea.addEventListener('click', (event) => {
     errorCount = 0;
   }
 })
+
+
+
+
+function printStateTable(row, rowNum) {
+  const transitions = document.getElementById('transitionsTable');
+  const newRow = transitions.insertRow(-1);
+  const th = document.createElement('th');
+  th.scope = "row";
+  th.innerText = rowNum;
+
+  // const arr = [`<th scope="row">${rowNum}</th>`];
+  
+  
+  for (const element of row) {
+    let newCell = newRow.insertCell(Object.keys(element));
+    // Append a text node to the cell
+    let newText = document.createTextNode(element);
+    newCell.appendChild(newText);
+    // arr.push(`<td>${element}</td>`);
+  }
+}
+
+function runStateGraph(output, delay) {
+  // auto delayed
+  for (let i = 0, l = output.length; i < l; i++) {
+    setTimeout((y) => {
+      console.log(output[y]);
+      printStateTable(output[y], y += 1);
+    }, i * delay * 1000, i);
+  }
+}
+
+function runSequence(valid, output) {
+  const oneSecondDelay = document.getElementById("1s");
+  const twoSecondDelay = document.getElementById("2s");
+  const fourSecondDelay = document.getElementById("4s");
+  oneSecondDelay.addEventListener('click', () => { runStateGraph(output, 1); });
+  twoSecondDelay.addEventListener('click', () => { runStateGraph(output, 2); });
+  fourSecondDelay.addEventListener('click', () => { runStateGraph(output, 4); });
+}
+
 
 /**
 * Getting a number between min and max
@@ -111,3 +121,9 @@ function getRandomSequence() {// To do: set min and max
 
 
 // @Todo: develop a generator for valid sequences
+
+
+(() => {
+  const arr = [[0, 'B', 1], [1, 'T', 2]];
+  printStateTable(arr[0]);
+})();
