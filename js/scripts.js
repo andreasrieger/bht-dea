@@ -30,6 +30,10 @@ if (genSeq) {
 }
 
 testDea.addEventListener('click', () => {//fire button twice doubles the console output
+  const transitions = document.getElementById('transitions');
+  while (transitions.firstChild) {
+    transitions.removeChild(transitions.firstChild);
+  }
   const machine = new Dea(proof);
   if (machine[0]) runSequence(machine[0], machine[1]);
 })
@@ -37,6 +41,12 @@ testDea.addEventListener('click', () => {//fire button twice doubles the console
 
 startDea.addEventListener('click', (event) => {
   console.log(`seqInput: ${seqInput.value}`);
+
+  const transitions = document.getElementById('transitions');
+  while (transitions.firstChild) {
+    transitions.removeChild(transitions.firstChild);
+  }
+
   // To do: check if empty
   // To do: add commas to string
   // To do: check string for compatibility with $sigma
@@ -57,10 +67,6 @@ startDea.addEventListener('click', (event) => {
 
 
 function printStateTable(row, rowNum) {
-  const transitions = document.getElementById('transitions');
-  while (transitions.firstChild) {
-    transitions.removeChild(transitions.firstChild);
-  }
   const newRow = transitions.insertRow(-1);
   const th = document.createElement('th');
   var thAttr = document.createAttribute('scope');
