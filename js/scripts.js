@@ -18,7 +18,6 @@ const seqInput = document.getElementById('seqInput');
 const startDea = document.getElementById('startDea');
 const testDea = document.getElementById('testDea');
 const response = document.getElementById('response');
-const transitions = document.getElementById('transitions');
 const sigmaPlaceholder = document.getElementsByClassName('sigmaPlaceholder');
 const stategraph = document.getElementById('stategraph');
 
@@ -32,25 +31,25 @@ if (genSeq) {
 
 
 
-function formatOutput(row, rowNum) {
-  var arr = [`<th scope="row">${rowNum}</th>`];
-  for (const element of row){
-    arr.push('<td>' + element + '</td>');
+function printStateTable(row, rowNum) {
+  const transitions = document.getElementById('transitionsTable');
+  const tr = document.createElement('tr');
+  const arr = [`<th scope="row">${rowNum}</th>`];
+  for (const element of row) {
+    arr.push(`<td>${element}</td>`);
   }
- /*  Object.entries(output).map(item => {
-    arr.push('<td>' + Object.values(item) + '</td>');
-  }); */
-  return '<tr>' + arr + '</tr>'; // To do: formatting output
+  tr.appendChild(arr);
+  transitions.appendChild(tr);
 }
 
-function runStateGraph(output, delay){
-    // auto delayed
-    for (let i = 0, l = output.length; i < l; i++) {
-      setTimeout((y) => { 
-        console.log(output[y]);
-        transitionsTable.appendChild(formatOutput(output[y], y+=1).toString());
-      }, i * delay * 1000, i);
-    }
+function runStateGraph(output, delay) {
+  // auto delayed
+  for (let i = 0, l = output.length; i < l; i++) {
+    setTimeout((y) => {
+      console.log(output[y]);
+      printStateTable(output[y], y += 1);
+    }, i * delay * 1000, i);
+  }
 }
 
 function runSequence(valid, output) {
