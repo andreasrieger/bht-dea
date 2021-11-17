@@ -13,17 +13,17 @@
 
 <body>
   <div class="container-fluid">
-    <nav class="navbar sticky-top navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-light bg-light">
       <div class="container-fluid">
-          <button type="button" id="start" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Start
-          </button>
-          <button type="button" id="test" class="btn btn-primary">
-            Test
-          </button>
+        <button type="button" id="start" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Start
+        </button>
+        <button type="button" id="test" class="btn btn-primary">
+          Test
+        </button>
 
-          <button type="button" id="clear" class="btn btn-danger">Danger</button>
-          <!--           
+        <button type="button" id="clear" class="btn btn-danger">Clear</button>
+        <!--           
           <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
             aria-controls="offcanvasExample">
             Settings
@@ -63,22 +63,20 @@
               content.</p>
           </div>
           <div class="card-footer">
-                <button type="button" id="startAuto" class="btn btn-primary dea-control" >Schnelldurchlauf</button>
-                <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle dea-control" type="button" id="startAutoDelayed"
-                    data-bs-toggle="dropdown" aria-expanded="false" >
-                    Starte Animation mit Intervall von...
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="startAutoDelayed">
-                    <li><a class="dropdown-item" id="1s">1 Sekunde</a></li>
-                    <li><a class="dropdown-item" id="2s">2 Sekunden</a></li>
-                    <li><a class="dropdown-item" id="4s">2 Sekunden</a></li>
-                  </ul>
-                </div>
-
-                <button type="button" id="startStepByStep" class="btn btn-primary dea-control" >Schritt für
-                  Schritt</button>
-
+            <button type="button" id="startAuto" class="btn btn-primary dea-control">Schnelldurchlauf</button>
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle dea-control" type="button" id="startAutoDelayed"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Starte Animation mit Intervall von...
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="startAutoDelayed">
+                <li><a class="dropdown-item" id="1s">1 Sekunde</a></li>
+                <li><a class="dropdown-item" id="2s">2 Sekunden</a></li>
+                <li><a class="dropdown-item" id="4s">4 Sekunden</a></li>
+              </ul>
+            </div>
+            <button type="button" id="startStepByStep" class="btn btn-primary dea-control">Schritt für
+              Schritt</button>
           </div>
         </div>
       </div>
@@ -91,13 +89,14 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Geben Sie eine beliebige Folge mit mindestens 5 der folgenden Zeichen ein: <span id="sigmaPlaceholder" class="fw-bold"></span></p>
+            <p>Geben Sie eine beliebige Folge mit mindestens 5 der folgenden Zeichen ein: <span id="sigmaPlaceholder"
+                class="fw-bold"></span></p>
             <div class="row">
               <!-- <form class="row g-3 needs-validation" novalidate> -->
               <div class="col-auto">
                 <div class="input-group mb-3">
-                  <input type="text" id="seqInput" class="form-control" placeholder="B, P, V, V, E, ..."
-                    aria-label="B, P, V, V, E, ..." aria-describedby="generateSequence">
+                  <input type="text" id="seqInput" class="form-control text-uppercase" placeholder="B, P, V, V, E, ..."
+                    aria-label="B, P, V, V, E, ..." aria-describedby="generateSequence" valid="false" required>
                   <button class="btn btn-outline-secondary" type="button" id="generateSequence">Zufällige Zeichenfolge
                     erstellen</button>
                 </div>
@@ -106,8 +105,9 @@
                 <p>oder</p>
               </div>
               <div class="col-auto">
-                <button type="submit" id="startDea" class="btn btn-primary mb-3" data-bs-dismiss="modal" disabled>
-                  Starte Automaten
+                <!-- <button type="submit" id="startDea" class="btn btn-primary mb-3" data-bs-dismiss="modal"> -->
+                <button type="submit" id="startDea" class="btn btn-primary mb-3">
+                  Eingabe prüfen
                 </button>
               </div>
               <!-- </form> -->

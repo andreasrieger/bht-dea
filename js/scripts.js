@@ -21,10 +21,13 @@ function printStateTableRow(row, rowNum) {
 
 function clearUi() {
   const transitions = document.getElementById("transitions");
+  const seqInput = document.getElementById("seqInput");
 
   while (transitions.firstChild) {
     transitions.removeChild(transitions.firstChild);
   }
+
+  seqInput.setAttribute("valid", "false");
 
   step = 0;
 }
@@ -36,6 +39,7 @@ function runAuto() {
 }
 
 function runDelayed(delay) {
+  console.log(output);
   for (let i = 0, l = output.length; i < l; i++) {
     setTimeout(
       (y) => {
@@ -87,7 +91,7 @@ function startMachine(sequence) {
   if (machine[0]) {
     output = machine[1];
   } else {
-    console.log("errororoororor");
+    console.log("Error");
   }
 }
 
@@ -112,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   if (seqInput) {
     document.getElementById("start").addEventListener("click", () => {
       seqInput.value = "";
+      seqInput.setAttribute("valid", "false");
     });
   }
 
@@ -125,15 +130,48 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 
-  seqInput.addEventListener("keyup", () => {
-    // To do: check if empty
-    if (seqInput.value == null) console.log("Feldwert ist leer!");
-  });
-
   document.getElementById("startDea").addEventListener("click", (event) => {
-    // To do: add commas to string
+    const input = seqInput.value;
+    const str = input.replace(",", "").toUpperCase();
+
+    startMachine(str);
+
+    const valid = () => {
+      for (let i = 0, l = str.length; i < l; i++) {
+        if (!sigma.includes(str[i])) return false;
+      }
+      return true;
+    }
+
+    // To do: check if empty
+    if (str === "") {
+      console.log("Feld ist leer!");
+      document.getElementById("startDea").classList.add("btn-danger");
+    }
+
     // To do: check string for compatibility with $sigma
-    startMachine(seqInput.value);
+    else if (str !== "" && !valid()) {
+      console.log(`Die Eingabe "${str}" enthält ungültige Zeichen!`);
+      if (!document.getElementById("startDea").classList.contains("btn-danger")){
+        document.getElementById("startDea").classList.add("btn-danger");
+      }
+    }
+
+    // prepare for take-off 
+    else if (str !== "" && valid()){
+      document.getElementById("startDea").setAttribute("data-bs-dismiss", "modal");
+      if (document.getElementById("startDea").classList.contains("btn-danger")){
+        document.getElementById("startDea").classList.replace("btn-danger", "btn-success");
+      } else document.getElementById("startDea").classList.add("btn-success");
+      document.getElementById("startDea").innerText = "Starte Automaten";
+      seqInput.setAttribute("valid", "true");
+    }
+
+    // take-off if ready
+    else if (str !== "" && valid() && seqInput.getAttribute("valid") == true) {
+      console.log(str);
+      // startMachine(str);
+    }
   });
 
   document.getElementById("startAuto").addEventListener("click", runAuto);
