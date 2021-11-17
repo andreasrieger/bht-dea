@@ -60,18 +60,16 @@ function printStateTable(row, rowNum) {
   const transitions = document.getElementById('transitionsTable');
   const newRow = transitions.insertRow(-1);
   const th = document.createElement('th');
-  th.scope = "row";
+  var thAttr = document.createAttribute('scope');
+  thAttr.value = "row";
+  th.setAttributeNode(thAttr);
   th.innerText = rowNum;
-
-  // const arr = [`<th scope="row">${rowNum}</th>`];
-  
-  
+  newRow.appendChild(th)
   for (const element of row) {
     let newCell = newRow.insertCell(Object.keys(element));
     // Append a text node to the cell
     let newText = document.createTextNode(element);
     newCell.appendChild(newText);
-    // arr.push(`<td>${element}</td>`);
   }
 }
 
