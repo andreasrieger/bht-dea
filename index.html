@@ -31,7 +31,7 @@
     <div class="row">
       <div class="col-4">
         <h1>Tabelle mit Zuständen</h1>
-        <table class="table">
+        <table id="transitionsTable" class="table">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -40,20 +40,28 @@
               <th scope="col">Q</th>
             </tr>
           </thead>
-          <tbody id="transitionsTable">
-          </tbody>
         </table>
       </div>
       <div class="col-8">
         <h1>Zustandsgraph</h1>
         <div class="card">
+          <div class="card-header">
+            Deterministischer Endlicher Automat
+          </div>
           <div class="card-body">
             <h5 class="card-title">Deterministischer Endlicher Automat</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="row">
-              <div class="col-auto"><button type="button" id="startAuto" class="btn btn-primary">Schnelldurchlauf</button></div>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+              content.</p>
+          </div>
+          <div class="card-footer">
+            <ul class="nav justify-content-center">
+              <li class="nav-item">
+                <button type="button" id="startAuto" class="btn btn-primary">Schnelldurchlauf</button>
+              <li>
+              <li class="nav-item">
                 <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" id="startAutoDelayed" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn btn-primary dropdown-toggle" type="button" id="startAutoDelayed"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     Starte Animation mit Intervall von...
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="startAutoDelayed">
@@ -62,8 +70,11 @@
                     <li><a class="dropdown-item" id="4s">2 Sekunden</a></li>
                   </ul>
                 </div>
-              <div class="col-auto"><button type="button" id="startStepByStep" class="btn btn-primary">Schritt für Schritt</button></div>
-            </div>
+              <li>
+              <li class="nav-item">
+                <button type="button" id="startStepByStep" class="btn btn-primary">Schritt für
+                  Schritt</button>
+              </li>
           </div>
         </div>
       </div>
@@ -76,24 +87,25 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Geben Sie eine beliebige Folge mit mindestens 5 der folgenden Zeichen ein: <span class="sigmaPlaceholder fw-bold"></span></p>
+            <p>Geben Sie eine beliebige Folge mit mindestens 5 der folgenden Zeichen ein: <span
+                class="sigmaPlaceholder fw-bold"></span></p>
             <div class="row">
               <!-- <form class="row g-3 needs-validation" novalidate> -->
-                <div class="col-auto">
-                  <div class="input-group mb-3">
-                    <input type="text" id="seqInput" class="form-control" placeholder="B, P, V, V, E, ..." aria-label="B, P, V, V, E, ..."
-                      aria-describedby="generateSequence">
-                    <button class="btn btn-outline-secondary" type="button" id="generateSequence">Zufällige Zeichenfolge
-                      erstellen</button>
-                  </div>
+              <div class="col-auto">
+                <div class="input-group mb-3">
+                  <input type="text" id="seqInput" class="form-control" placeholder="B, P, V, V, E, ..."
+                    aria-label="B, P, V, V, E, ..." aria-describedby="generateSequence">
+                  <button class="btn btn-outline-secondary" type="button" id="generateSequence">Zufällige Zeichenfolge
+                    erstellen</button>
                 </div>
-                <div class="col-auto">
-                  <p>oder</p>
-                </div>
-                <div class="col-auto">
-                  <button type="submit" id="startDea" class="btn btn-primary mb-3" data-bs-dismiss="modal">Starte
-                    Automaten</button>
-                </div>
+              </div>
+              <div class="col-auto">
+                <p>oder</p>
+              </div>
+              <div class="col-auto">
+                <button type="submit" id="startDea" class="btn btn-primary mb-3" data-bs-dismiss="modal">Starte
+                  Automaten</button>
+              </div>
               <!-- </form> -->
             </div>
           </div>

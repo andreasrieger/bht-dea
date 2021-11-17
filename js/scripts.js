@@ -58,7 +58,11 @@ startDea.addEventListener('click', (event) => {
 
 function printStateTable(row, rowNum) {
   const transitions = document.getElementById('transitionsTable');
-  const newRow = transitions.insertRow(-1);
+  while (transitions.firstChild) {
+    transitions.removeChild(transitions.firstChild);
+  }
+  const tbody = transitions.createTBody()
+  const newRow = tbody.insertRow(-1);
   const th = document.createElement('th');
   var thAttr = document.createAttribute('scope');
   thAttr.value = "row";
