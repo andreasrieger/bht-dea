@@ -50,7 +50,7 @@ function runOutput(valid, output) {
     const stepByStep = document.getElementById("startStepByStep");
     const transitions = document.getElementById("transitions");
     
-    document.getElementsByClassName("dea-control").removeAttribute("disabled");
+    document.querySelectorAll(".dea-control").removeAttribute("disabled");
 
     while (transitions.firstChild) {
       transitions.removeChild(transitions.firstChild);
