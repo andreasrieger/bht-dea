@@ -66,7 +66,7 @@ function printStateTable(row, rowNum) {
   th.innerText = rowNum;
   newRow.appendChild(th)
   for (const element of row) {
-    let newCell = newRow.insertCell(Object.keys(element));
+    let newCell = newRow.insertCell(Object.keys(element) + 1);
     // Append a text node to the cell
     let newText = document.createTextNode(element);
     newCell.appendChild(newText);
@@ -119,9 +119,3 @@ function getRandomSequence() {// To do: set min and max
 
 
 // @Todo: develop a generator for valid sequences
-
-
-(() => {
-  const arr = [[0, 'B', 1], [1, 'T', 2]];
-  printStateTable(arr[0]);
-})();
