@@ -49,9 +49,8 @@ function runOutput(valid, output) {
     const fourSecondDelay = document.getElementById("4s");
     const stepByStep = document.getElementById("startStepByStep");
     const transitions = document.getElementById("transitions");
-    const deaControl = document.querySelectorAll(".dea-control");
     
-    deaControl.removeAttribute("disabled");
+    document.getElementsByClassName("dea-control").removeAttribute("disabled");
 
     while (transitions.firstChild) {
       transitions.removeChild(transitions.firstChild);
