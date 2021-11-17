@@ -19,7 +19,7 @@ function printStateTableRow(row, rowNum) {
 
 function runAuto(output) {
   for (let i = 0, l = output.length; i < l; i++) {
-    printStateTableRow(output[i], (i += 1));
+    printStateTableRow(output[i], (i += 1)); //bug: printing only lines 0, 2 and 4 
   }
 }
 
@@ -39,8 +39,6 @@ function runDelayed(output, delay) {
 
 function runOutput(valid, output) {
 
-  const warning = document.getElementById("warning");
-
   if (valid) {
     // To do: running sequence according to the settings (auto, auto delayed, step by step)
     const autoRun = document.getElementById("startAuto");
@@ -50,7 +48,7 @@ function runOutput(valid, output) {
     const stepByStep = document.getElementById("startStepByStep");
     const transitions = document.getElementById("transitions");
     
-    document.querySelectorAll(".dea-control").removeAttribute("disabled");
+    // document.querySelectorAll(".dea-control").removeAttribute("disabled");
 
     while (transitions.firstChild) {
       transitions.removeChild(transitions.firstChild);
@@ -68,7 +66,7 @@ function runOutput(valid, output) {
       runDelayed(output, 4);
     });
 
-    // running into timeout
+    // bug: should print the output line by line manually but running into timeout
     /*   for (let i = 0, l = output.length; i < l; ) {
   stepByStep.addEventListener("click", () => {
     printStateTableRow(output[i], (i += 1));
@@ -76,7 +74,7 @@ function runOutput(valid, output) {
   });
 } */
   } else {
-    warning.removeAttribute("disabled");
+    // display some kind of warning
   }
 }
 
