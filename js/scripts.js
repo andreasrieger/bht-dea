@@ -40,7 +40,7 @@ function runDelayed(output, delay) {
 function runOutput(valid, output) {
 
   const warning = document.getElementById("warning");
-  
+
   if (valid) {
     // To do: running sequence according to the settings (auto, auto delayed, step by step)
     const autoRun = document.getElementById("startAuto");
@@ -51,7 +51,6 @@ function runOutput(valid, output) {
     const transitions = document.getElementById("transitions");
     const deaControl = document.querySelectorAll(".dea-control");
     
-    warning.setAttribute("disabled");
     deaControl.removeAttribute("disabled");
 
     while (transitions.firstChild) {
