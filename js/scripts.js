@@ -125,10 +125,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 
-  document.getElementById("startDea").addEventListener("click", (event) => {
+  seqInput.addEventListener("keyup", () => {
     // To do: check if empty
-    if (seqInput.value != null) console.log("Feldwert ist leer!");
+    if (seqInput.value == null) console.log("Feldwert ist leer!");
+  });
 
+  document.getElementById("startDea").addEventListener("click", (event) => {
     // To do: add commas to string
     // To do: check string for compatibility with $sigma
     startMachine(seqInput.value);
