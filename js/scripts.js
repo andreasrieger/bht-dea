@@ -48,7 +48,7 @@ function runStateGraph(output, delay){
     for (let i = 0, l = output.length; i < l; i++) {
       setTimeout((y) => { 
         console.log(output[y]);
-        transitionsTable.append(formatOutput(output[y], y+=1));
+        transitionsTable.append(formatOutput(output[y], y+=1).toString());
       }, i * delay * 1000, i);
     }
 }
