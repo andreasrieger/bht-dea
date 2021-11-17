@@ -13,20 +13,18 @@
 
 <body>
   <div class="container-fluid">
-    <nav class="navbar sticky-top navbar-light bg-light">
+    <nav class="navbar-nav sticky-top navbar-light bg-light">
       <div class="container-fluid">
-        <nav class="nav">
-          <button type="button" id="startDea" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Start
-        </button>
-        <button type="button" id="testDea" class="btn btn-primary">
-          Test
-        </button>
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-          aria-controls="offcanvasExample">
-          Settings
-        </button>
-        </nav>
+          <button type="button" id="start" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Start
+          </button>
+          <button type="button" id="testDea" class="btn btn-primary">
+            Test
+          </button>
+          <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+            aria-controls="offcanvasExample">
+            Settings
+          </button>
       </div>
     </nav>
     <div class="row">
@@ -94,8 +92,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Geben Sie eine beliebige Folge mit mindestens 5 der folgenden Zeichen ein: <span
-                class="sigmaPlaceholder fw-bold"></span></p>
+            <p>Geben Sie eine beliebige Folge mit mindestens 5 der folgenden Zeichen ein: <span id="sigmaPlaceholder" class="fw-bold"></span></p>
             <div class="row">
               <!-- <form class="row g-3 needs-validation" novalidate> -->
               <div class="col-auto">

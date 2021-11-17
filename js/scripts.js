@@ -62,7 +62,7 @@ function runOutput(valid, output) {
   });
 
   // running into timeout
-/*   for (let i = 0, l = output.length; i < l; ) {
+  /*   for (let i = 0, l = output.length; i < l; ) {
     stepByStep.addEventListener("click", () => {
       printStateTableRow(output[i], (i += 1));
       i += 1;
@@ -105,11 +105,12 @@ function startMachine(sequence) {
 
 document.addEventListener("DOMContentLoaded", function (event) {
   console.log("DOM fully loaded and parsed");
+  const start = document.getElementById("start");
   const genSeq = document.getElementById("generateSequence");
   const seqInput = document.getElementById("seqInput");
   const startDea = document.getElementById("startDea");
   const testDea = document.getElementById("testDea");
-  const sigmaPlaceholder = document.getElementsByClassName("sigmaPlaceholder");
+  const sigmaPlaceholder = document.getElementById("sigmaPlaceholder");
   const stategraph = document.getElementById("stategraph");
 
   const sigma = ["B", "E", "P", "S", "T", "V", "X"],
@@ -119,6 +120,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
     startMachine(proof); //fire button twice doubles the console output
   });
 
+  if (seqInput) {
+    seqInput.value = "";
+  }
+
+  if (sigmaPlaceholder) {
+    sigmaPlaceholder.innerText = sigma;
+  }
+
   if (genSeq) {
     genSeq.addEventListener("click", () => {
       seqInput.value = getRandomSequence(sigma);
@@ -126,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 
   startDea.addEventListener("click", (event) => {
-    console.log(`seqInput: ${seqInput.value}`);
+    // console.log(`seqInput: ${seqInput.value}`);
 
     // To do: check if empty
     // To do: add commas to string
