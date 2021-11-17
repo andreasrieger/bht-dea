@@ -22,6 +22,25 @@
         <button type="button" id="testDea" class="btn btn-primary">
           Test
         </button>
+
+        <!-- Example split danger button -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary" data-bs-target="#exampleModal">Action</button>
+          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <span class="visually-hidden">Toggle Dropdown</span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" id="testDea">Test</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight">Settings</a></li>
+          </ul>
+        </div>
+
+
+
         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
           aria-controls="offcanvasExample">
           Settings
@@ -34,19 +53,19 @@
           <div class="card-header">
             Tabelle mit Zuständen
           </div>
-        </div>
-        <div class="card-body">
-          <table id="transitionsTable" class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Q</th>
-                <th scope="col">&#931;</th>
-                <th scope="col">Q</th>
-              </tr>
-            </thead>
-            <tbody id="transitions"></tbody>
-          </table>
+          <div class="card-body">
+            <table id="transitionsTable" class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Q</th>
+                  <th scope="col">&#931;</th>
+                  <th scope="col">Q</th>
+                </tr>
+              </thead>
+              <tbody id="transitions"></tbody>
+            </table>
+          </div>
         </div>
       </div>
       <div class="col-8">
