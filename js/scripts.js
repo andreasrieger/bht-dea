@@ -121,7 +121,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
   });
 
   if (seqInput) {
-    seqInput.value = "";
+    start.addEventListener("click", () => {
+      seqInput.value = "";
+    });
   }
 
   if (sigmaPlaceholder) {
