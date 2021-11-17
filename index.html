@@ -60,13 +60,19 @@
             <h5 class="card-title">Deterministischer Endlicher Automat</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
               content.</p>
+              <div id="warning" class="alert alert-warning d-flex align-items-center" role="alert" disabled>
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                  An example warning alert with an icon
+                </div>
+              </div>
           </div>
           <div class="card-footer">
-                <button type="button" id="startAuto" class="btn btn-primary">Schnelldurchlauf</button>
+                <button type="button" id="startAuto" class="btn btn-primary dea-control" disabled>Schnelldurchlauf</button>
 
                 <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" id="startAutoDelayed"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                  <button class="btn btn-primary dropdown-toggle dea-control" type="button" id="startAutoDelayed"
+                    data-bs-toggle="dropdown" aria-expanded="false" disabled>
                     Starte Animation mit Intervall von...
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="startAutoDelayed">
@@ -76,7 +82,7 @@
                   </ul>
                 </div>
 
-                <button type="button" id="startStepByStep" class="btn btn-primary">Schritt für
+                <button type="button" id="startStepByStep" class="btn btn-primary dea-control" disabled>Schritt für
                   Schritt</button>
 
           </div>

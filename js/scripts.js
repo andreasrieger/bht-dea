@@ -38,36 +38,48 @@ function runDelayed(output, delay) {
 }
 
 function runOutput(valid, output) {
-  // To do: running sequence according to the settings (auto, auto delayed, step by step)
-  const autoRun = document.getElementById("startAuto");
-  const oneSecondDelay = document.getElementById("1s");
-  const twoSecondDelay = document.getElementById("2s");
-  const fourSecondDelay = document.getElementById("4s");
-  const stepByStep = document.getElementById("startStepByStep");
-  const transitions = document.getElementById("transitions");
-  while (transitions.firstChild) {
-    transitions.removeChild(transitions.firstChild);
-  }
-  autoRun.addEventListener("click", () => {
-    runAuto(output);
-  });
-  oneSecondDelay.addEventListener("click", () => {
-    runDelayed(output, 1);
-  });
-  twoSecondDelay.addEventListener("click", () => {
-    runDelayed(output, 2);
-  });
-  fourSecondDelay.addEventListener("click", () => {
-    runDelayed(output, 4);
-  });
 
-  // running into timeout
-  /*   for (let i = 0, l = output.length; i < l; ) {
-    stepByStep.addEventListener("click", () => {
-      printStateTableRow(output[i], (i += 1));
-      i += 1;
+  const warning = document.getElementById("warning");
+  
+  if (valid) {
+    // To do: running sequence according to the settings (auto, auto delayed, step by step)
+    const autoRun = document.getElementById("startAuto");
+    const oneSecondDelay = document.getElementById("1s");
+    const twoSecondDelay = document.getElementById("2s");
+    const fourSecondDelay = document.getElementById("4s");
+    const stepByStep = document.getElementById("startStepByStep");
+    const transitions = document.getElementById("transitions");
+    const deaControl = document.querySelectorAll(".dea-control");
+    
+    warning.setAttribute("disabled");
+    deaControl.removeAttribute("disabled");
+
+    while (transitions.firstChild) {
+      transitions.removeChild(transitions.firstChild);
+    }
+    autoRun.addEventListener("click", () => {
+      runAuto(output);
     });
-  } */
+    oneSecondDelay.addEventListener("click", () => {
+      runDelayed(output, 1);
+    });
+    twoSecondDelay.addEventListener("click", () => {
+      runDelayed(output, 2);
+    });
+    fourSecondDelay.addEventListener("click", () => {
+      runDelayed(output, 4);
+    });
+
+    // running into timeout
+    /*   for (let i = 0, l = output.length; i < l; ) {
+  stepByStep.addEventListener("click", () => {
+    printStateTableRow(output[i], (i += 1));
+    i += 1;
+  });
+} */
+  } else {
+    warning.removeAttribute("disabled");
+  }
 }
 
 /**
