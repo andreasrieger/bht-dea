@@ -124,9 +124,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
   const sigma = ["B", "E", "P", "S", "T", "V", "X"],
     proof = ["B", "P", "V", "V", "E"];
 
-  testDea.addEventListener("click", () => {
-    startMachine(proof); //fire button twice doubles the console output
-  });
+  testDea.addEventListener("click", function () {
+      startMachine(proof); // bug: the more often the button is fired it multiplies the output
+    });
 
   if (seqInput) {
     start.addEventListener("click", () => {
