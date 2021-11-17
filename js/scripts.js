@@ -61,12 +61,13 @@ function runOutput(valid, output) {
     runDelayed(output, 4);
   });
 
-  for (let i = 0, l = output.length; i < l; ) {
+  // running into timeout
+/*   for (let i = 0, l = output.length; i < l; ) {
     stepByStep.addEventListener("click", () => {
       printStateTableRow(output[i], (i += 1));
       i += 1;
     });
-  }
+  } */
 }
 
 /**
@@ -113,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   const sigma = ["B", "E", "P", "S", "T", "V", "X"],
     proof = ["B", "P", "V", "V", "E"];
-    
+
   testDea.addEventListener("click", () => {
     startMachine(proof); //fire button twice doubles the console output
   });
