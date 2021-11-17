@@ -113,6 +113,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   const sigma = ["B", "E", "P", "S", "T", "V", "X"],
     proof = ["B", "P", "V", "V", "E"];
+    
   testDea.addEventListener("click", () => {
     startMachine(proof); //fire button twice doubles the console output
   });
