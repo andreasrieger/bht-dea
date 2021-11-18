@@ -14,9 +14,23 @@ function printStateTableRow(row, rowNum) {
   th.innerText = rowNum;
   newRow.appendChild(th);
   for (const element of row) {
-    let newCell = newRow.insertCell(Object.keys(element) + 1);
+    // console.log(`cell: ${element}`);
+    // let newCell = newRow.insertCell(Object.keys(element) + 1);
+    let newCell = newRow.insertCell(-1);
     let newText = document.createTextNode(element);
     newCell.appendChild(newText);
+  }
+}
+
+function printStateGraph(row) {
+  document.getElementById('e0').setAttribute("stroke", "green");
+  document.getElementById('e0').setAttribute("fill", "green");
+  document.getElementById('s0').setAttribute("fill", "green");
+  for (const element of row) {
+    if (Number.isInteger(element)) {
+      console.log('s' + element);
+      document.getElementById('s' + element).setAttribute("fill", "green");
+    }
   }
 }
 
@@ -26,6 +40,18 @@ function clearUi() {
   document.getElementById("outputAll").setAttribute("disabled", "");
   document.getElementById("outputDelayed").setAttribute("disabled", "");
   document.getElementById("outputStepByStep").setAttribute("disabled", "");
+
+  const nodes = document.querySelectorAll(".graphNode");
+  const edges = document.querySelectorAll(".graphEdge");
+
+  for (let i = 0, l = nodes.length; i < l; ++i) {
+    nodes[i].removeAttribute("fill");
+  }
+
+  for (let i = 0, l = edges.length; i < l; ++i) {
+    edges[i].setAttribute("stroke", "black");
+    edges[i].setAttribute("fill", "black");
+  }
 
   while (transitions.firstChild) {
     transitions.removeChild(transitions.firstChild);
@@ -39,6 +65,7 @@ function clearUi() {
 function runAuto() {
   for (let i = 0, l = output.length; i < l; i++) {
     printStateTableRow(output[i], i + 1);
+    printStateGraph(output[i]);
   }
 }
 
@@ -49,6 +76,7 @@ function runDelayed(delay) {
       (y) => {
         console.log(output[y]);
         printStateTableRow(output[y], y + 1);
+        printStateGraph(output[y]);
       },
       i * delay * 1000,
       i
@@ -59,6 +87,7 @@ function runDelayed(delay) {
 function runStepByStep() {
   if (step + 1 <= output.length) {
     printStateTableRow(output[step], step + 1);
+    printStateGraph(output[step]);
     step += 1;
   }
 }
@@ -155,17 +184,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
   }
 
   // if (document.getElementById("form").classList.contains('was-validated')) {
-    startDea.addEventListener("click", () => {
+  startDea.addEventListener("click", () => {
     // document.getElementById("form").addEventListener("submit", function () {
-      const input = seqInput.value;
-      // const str = input.replace(",", "").toUpperCase();// To do: check for spaces and other invalid chars
+    const input = seqInput.value;
+    // const str = input.replace(",", "").toUpperCase();// To do: check for spaces and other invalid chars
 
-      startMachine(input);
-
-    
+    startMachine(input);
 
 
-    });
+
+
+  });
   // }
 
 

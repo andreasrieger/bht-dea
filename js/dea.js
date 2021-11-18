@@ -10,18 +10,18 @@ class Dea {
         for (const val of sequence) {
             const response = [
                 this.state,
-                val,
-                this.transition(val)
+                val
             ];
             this.state = this.transition(val);
             if (this.state === undefined) {
                 console.log(`Error: Status unknown`);
                 this.errorCount += 1;
-                response[2] = -1;
+                response.push(-1);
                 transitions.push(response);
                 return [false, transitions];
             } else {
                 console.log(`New State: ${this.state}`);
+                response.push(this.state);
                 transitions.push(response);
                 // console.log(transitions);
             }

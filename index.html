@@ -8,7 +8,6 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <title>Finite state machine (DEA) embedding Reber Grammar</title>
   <link rel="stylesheet" href="css/styles.css">
-
 </head>
 
 <body>
@@ -45,75 +44,205 @@
             </span> -->
         </ul>
       </div>
-  </div>
-  </nav>
-  <div class="row">
-    <div class="col-4">
-      <div class="card">
-        <div class="card-header">
-          Tabelle mit Zuständen
-        </div>
-        <div class="card-body">
-          <table id="transitionsTable" class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Q</th>
-                <th scope="col">&#931;</th>
-                <th scope="col">Q</th>
-              </tr>
-            </thead>
-            <tbody id="transitions"></tbody>
-          </table>
+    </nav>
+    <div class="row">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-header">
+            Tabelle mit Zuständen
+          </div>
+          <div class="card-body">
+            <table id="transitionsTable" class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Q</th>
+                  <th scope="col">&#931;</th>
+                  <th scope="col">Q</th>
+                </tr>
+              </thead>
+              <tbody id="transitions"></tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-8">
-      <div class="card">
-        <div class="card-header">
-          Zustandsgraph
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Deterministischer Endlicher Automat</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
-        </div>
-        <div class="card-footer">
-          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            <button type="button" id="outputAll" class="btn btn-primary me-2 output-control"
-              disabled>Schnelldurchlauf</button>
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle me-2 output-control" type="button" id="outputDelayed"
-                data-bs-toggle="dropdown" aria-expanded="false" disabled>
-                Starte Animation mit Intervall von...
+      <div class="col-8">
+        <div class="card">
+          <div class="card-header">
+            Zustandsgraph
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Deterministischer Endlicher Automat</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+              content.</p>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50" class="bg-light w-100 h-100" fill="black">
+
+              <!-- Edge Start -->
+              <svg viewBox="-200 -100 400 200" id="e0" class="graphEdge" stroke="black">
+                <line x1="-195" x2="-155" />
+                <polygon points="-170, 0 -178, -5 -178, 5 -170, 0" />
+              </svg>
+              
+    <!--           <svg viewBox="-200 -100 400 200" fill="black">
+                <polygon points="-170, 0 -178, -5 -178, 5 -170, 0" />
+              </svg> -->
+
+              <!-- Edge 0-1 (B) -->
+              <svg viewBox="-200 -100 400 200">
+                <line x1="-155" x2="-90" id="e0B1" class="graphEdge" stroke="black" />
+              </svg>
+
+              <!-- State 0 -->
+              <svg viewBox="-200 -100 400 200" class="graphNode" id="s0" fill="black">
+                <circle cx="-155" r="15" />
+                <text x="-155" dy="3" text-anchor="middle" font-size="8" fill="red">0</text>
+              </svg>
+
+              <!-- Edge 1-2 (T) -->
+              <svg viewBox="-200 -100 400 200">
+                <line x1="-90" x2="-35" y2="-60" id="e1T2" class="graphEdge" stroke="black" />
+              </svg>
+
+              <!-- Edge 1-3 (P) -->
+              <svg viewBox="-200 -100 400 200">
+                <line x1="-90" x2="-35" y2="60" id="e1P3" class="graphEdge" stroke="black" />
+              </svg>
+
+              <!-- State 1 -->
+              <svg viewBox="-200 -100 400 200" class="graphNode" id="s1" fill="black">
+                <circle cx="-90" r="15" />
+                <text x="-90" dy="3" text-anchor="middle" font-size="8" fill="red">1</text>
+              </svg>
+
+              <!-- Edge 2-4 (X) -->
+              <svg viewBox="-200 -100 400 200">
+                <line x1="-35" y1="-60" x2="35" y2="-60" id="e2X4" class="graphEdge" stroke="black" />
+              </svg>
+
+              <!-- Edge 2-2 (S) -->
+              <svg viewBox="-200 -100 400 200" id="e2S2" class="graphEdge" stroke="black">
+                <circle cx="-47" cy="-78" r="15" fill="#f8f9fa" />
+                <text x="-47" y="-78" dy="3" text-anchor="middle" font-size="8" fill="red">2</text>
+              </svg>
+
+              <!-- State 2 -->
+              <svg viewBox="-200 -100 400 200" class="graphNode" id="s2" fill="black">
+                <circle cx="-35" cy="-60" r="15" />
+                <text x="-35" y="-60" dy="3" text-anchor="middle" font-size="8" fill="red">2</text>
+              </svg>
+
+              <!-- Edge 3-5 (V) -->
+              <svg viewBox="-200 -100 400 200">
+                <line x1="-35" y1="60" x2="35" y2="60" id="e3V5" class="graphEdge" stroke="black" />
+              </svg>
+
+              <!-- Edge 4-3 (X) -->
+              <svg viewBox="-200 -100 400 200">
+                <line x1="35" y1="-60" x2="-35" y2="60" id="e4X3" class="graphEdge" stroke="black" />
+              </svg>
+
+              <!-- Edge 3-3 (T) -->
+              <svg viewBox="-200 -100 400 200" id="e3T3" class="graphEdge" stroke="black">
+                <circle cx="-47" cy="78" r="15" fill="#f8f9fa" />
+                <text x="-47" y="78" dy="3" text-anchor="middle" font-size="8" fill="red">3</text>
+              </svg>
+
+              <!-- State 3 -->
+              <svg viewBox="-200 -100 400 200" class="graphNode" id="s3" fill="black">
+                <circle cx="-35" cy="60" r="15" />
+                <text x="-35" y="60" dy="3" text-anchor="middle" font-size="8" fill="red">3</text>
+              </svg>
+
+              <!-- Edge 4-6 (S) -->
+              <svg viewBox="-200 -100 400 200">
+                <line x1="35" y1="-60" x2="90" id="e4S6" class="graphEdge" stroke="black" />
+              </svg>
+
+              <!-- Edge 5-4 (P) -->
+              <svg viewBox="-200 -100 400 200">
+                <line x1="35" y1="-60" x2="35" y2="60" id="e5P4" class="graphEdge" stroke="black" />
+              </svg>
+
+              <!-- State 4 -->
+              <svg viewBox="-200 -100 400 200" class="graphNode" id="s4" fill="black">
+                <circle cx="35" cy="-60" r="15" />
+                <text x="35" y="-60" dy="3" text-anchor="middle" font-size="8" fill="red">4</text>
+              </svg>
+
+              <!-- Edge 5-6 (V) -->
+              <svg viewBox="-200 -100 400 200">
+                <line x1="35" y1="60" x2="90" id="e5V6" class="graphEdge" stroke="black" />
+              </svg>
+
+              <!-- State 5 -->
+              <svg viewBox="-200 -100 400 200" class="graphNode" id="s5" fill="black">
+                <circle cx="35" cy="60" r="15" />
+                <text x="35" y="60" dy="3" text-anchor="middle" font-size="8" fill="red">5</text>
+              </svg>
+
+              <!-- Edge 6-7 (E) -->
+              <svg viewBox="-200 -100 400 200">
+                <line x1="90" x2="155" id="e6E7" class="graphEdge" stroke="black" />
+              </svg>
+
+              <!-- State 6 -->
+              <svg viewBox="-200 -100 400 200" class="graphNode" id="s6" fill="black">
+                <circle cx="90" r="15" />
+                <text x="90" dy="3" text-anchor="middle" font-size="8" fill="red">6</text>
+              </svg>
+
+              <!-- State 7 -->
+              <svg viewBox="-200 -100 400 200" class="graphNode" id="s7" fill="black">
+                <circle cx="155" r="15" />
+                <circle cx="155" r="13" stroke="#f8f9fa" />
+                <text x="155" dy="3" text-anchor="middle" font-size="8" fill="red">7</text>
+              </svg>
+
+
+
+            </svg>
+          </div>
+          <div class="card-footer">
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+              <button type="button" id="outputAll" class="btn btn-primary me-2 output-control"
+                disabled>Schnelldurchlauf</button>
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle me-2 output-control" type="button" id="outputDelayed"
+                  data-bs-toggle="dropdown" aria-expanded="false" disabled>
+                  Starte Animation mit Intervall von...
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="outputDelayed">
+                  <li><a class="dropdown-item" id="1s">1 Sekunde</a></li>
+                  <li><a class="dropdown-item" id="2s">2 Sekunden</a></li>
+                  <li><a class="dropdown-item" id="4s">4 Sekunden</a></li>
+                </ul>
+              </div>
+              <button type="button" id="outputStepByStep" class="btn btn-primary me-2 output-control" disabled>
+                Schritt für Schritt
               </button>
-              <ul class="dropdown-menu" aria-labelledby="outputDelayed">
-                <li><a class="dropdown-item" id="1s">1 Sekunde</a></li>
-                <li><a class="dropdown-item" id="2s">2 Sekunden</a></li>
-                <li><a class="dropdown-item" id="4s">4 Sekunden</a></li>
-              </ul>
             </div>
-            <button type="button" id="outputStepByStep" class="btn btn-primary me-2 output-control" disabled>
-              Schritt für Schritt
-            </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div id="exampleModal" class="modal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Zeichenfolge eingeben</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Geben Sie eine beliebige Folge mit mindestens 5 der folgenden Zeichen ein: <span id="sigmaPlaceholder"
-              class="fw-bold"></span></p>
-          <div class="row">
-            <!-- <form class="row g-3 needs-validation" novalidate> -->
-            <!--               <div class="col-auto">
+    <div class="row">
+      <div class="col">
+
+      </div>
+    </div>
+    <div id="exampleModal" class="modal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Zeichenfolge eingeben</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Geben Sie eine beliebige Folge mit mindestens 5 der folgenden Zeichen ein: <span id="sigmaPlaceholder"
+                class="fw-bold"></span></p>
+            <div class="row">
+              <!-- <form class="row g-3 needs-validation" novalidate> -->
+              <!--               <div class="col-auto">
                 <div class="input-group mb-3">
                   <input type="text" id="seqInput" class="form-control text-uppercase" placeholder="B, P, V, V, E, ..."
                     aria-label="B, P, V, V, E, ..." aria-describedby="generateSequence" valid="false" minlength="5"
@@ -130,15 +259,18 @@
                   Starte Automaten
                 </button>
               </div> -->
-            <!-- </form> -->
+              <!-- </form> -->
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+
+
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -146,6 +278,7 @@
   <script type="text/javascript" src="js/dea.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
   <script type="text/javascript" src="js/formvalidation.js"></script>
+  <!-- <script type="text/javascript" src="js/canvas.js"></script> -->
 </body>
 
 </html>
