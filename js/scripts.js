@@ -22,8 +22,7 @@ function printStateTableRow(row, rowNum) {
 
 function clearUi() {
   const transitions = document.getElementById("transitions");
-  // const seqInput = document.getElementById("seqInput");
-  document.getElementById("seqOutput").innerText = "";
+  // document.getElementById("seqOutput").innerText = "";
   document.getElementById("outputAll").setAttribute("disabled", "");
   document.getElementById("outputDelayed").setAttribute("disabled", "");
   document.getElementById("outputStepByStep").setAttribute("disabled", "");
@@ -31,6 +30,8 @@ function clearUi() {
   while (transitions.firstChild) {
     transitions.removeChild(transitions.firstChild);
   }
+
+  clearForm();
 
   step = 0;
 }
@@ -89,19 +90,28 @@ function getRandomSequence(alphabet) {
 
 // @Todo: develop a generator for valid sequences
 
+function clearForm() {
+  const form = document.getElementById("form");
+  form.classList.remove('was-validated');
+  document.getElementById("seqInput").value = "";
+  //   while (tSomeStyleClasses.length) {
+  //     tSomeStyleClasses[0].classList.remove("someStyle");
+  // }
+}
+
 function startMachine(sequence) {
-  const outputText = document.getElementById("seqOutput");
+  // const outputText = document.getElementById("seqOutput");
   const machine = new Dea(sequence);
   if (machine[0]) {
     output = machine[1];
-    outputText.innerText = `Die Zeichenfolge "${sequence}" wurde akzeptiert`;
+    // outputText.innerText = `Die Zeichenfolge "${sequence}" wurde akzeptiert`;
     document.getElementById("outputAll").removeAttribute("disabled");
     document.getElementById("outputDelayed").removeAttribute("disabled");
     document.getElementById("outputStepByStep").removeAttribute("disabled");
     document.getElementById("clear-control").removeAttribute("disabled");
   } else {
     console.log("Error");
-    outputText.innerText = `Die Zeichenfolge "${sequence}" wurde nicht akzeptiert`;
+    // outputText.innerText = `Die Zeichenfolge "${sequence}" wurde nicht akzeptiert`;
   }
 }
 
@@ -115,10 +125,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   const sigma = ["B", "E", "P", "S", "T", "V", "X"],
     proof = ["B", "P", "V", "V", "E"];
-    //BTSSXXTVVE
-    // BTXXVPSE
-    // BPVPXVPXVPXVVE
-    // BTSXXVPSE
+  //BTSSXXTVVE
+  // BTXXVPSE
+  // BPVPXVPXVPXVVE
+  // BTSXXVPSE
 
   document.getElementById("test").addEventListener("click", function () {
     startMachine(proof);
@@ -144,51 +154,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 
-  startDea.addEventListener("click", (event) => {
-    const input = seqInput.value;
-    const str = input.replace(",", "").toUpperCase();// To do: check for spaces and other invalid chars
+  // if (document.getElementById("form").classList.contains('was-validated')) {
+    startDea.addEventListener("click", () => {
+    // document.getElementById("form").addEventListener("submit", function () {
+      const input = seqInput.value;
+      // const str = input.replace(",", "").toUpperCase();// To do: check for spaces and other invalid chars
 
-    startMachine(input);
+      startMachine(input);
 
-    /* const valid = () => {
-      for (let i = 0, l = str.length; i < l; i++) {
-        if (!sigma.includes(str[i])) return false;
-      }
-      return true;
-    }
-
-    // To do: check if empty
-    if (str === "") {
-      console.log("Feld ist leer!");
-      startDea.classList.add("btn-danger");
-    }
-
-    // To do: check string for compatibility with $sigma
-    else if (str !== "" && !valid()) {
-      console.log(`Die Eingabe "${str}" enthält ungültige Zeichen!`);
-      if (!startDea.classList.contains("btn-danger")){
-        startDea.classList.add("btn-danger");
-      }
-    }
-
-    // prepare for take-off 
-    else if (str !== "" && valid()){
-      startDea.setAttribute("data-bs-dismiss", "modal");
-      if (startDea.classList.contains("btn-danger")){
-        startDea.classList.replace("btn-danger", "btn-success");
-      } else startDea.classList.add("btn-success");
-      startDea.innerText = "Starte Automaten";
-    }
-
-    // take-off if ready
-    else if (str !== "" && valid() && seqInput.getAttribute("valid") == true) {
-      console.log(str);
-      // startMachine(str);
-    } */
+    
 
 
+    });
+  // }
 
-  });
 
   document.getElementById("outputAll").addEventListener("click", runAuto);
 
