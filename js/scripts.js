@@ -23,44 +23,95 @@ function printStateTableRow(row, rowNum) {
 }
 
 function printStateGraph(row) {
-  document.getElementById('e0').setAttribute("stroke", "green");
-  document.getElementById('e0').setAttribute("fill", "green");
-  document.getElementById('s0').setAttribute("fill", "green");
-  for (const element of row) {
-    if (Number.isInteger(element)) {
-      console.log('s' + element);
-      document.getElementById('s' + element).setAttribute("fill", "green");
+
+  // light-grey: #f8f9fa
+  // dark-grey: #6c757d
+  // green: #2A8754
+
+  // initial state graph (arrow)
+  const e0 = document.getElementById('e0');
+  for (let i = 0, l = e0.children.length; i < l; i++) {
+    const nodeChild = e0.children[i];
+    if(nodeChild.classList.contains("background")) {
+      changeColor(nodeChild, "bg-dark", "bg-success");
+    } else if(nodeChild.classList.contains("border")) {
+      changeColor(nodeChild, "border-dark", "border-success");
     }
   }
+
+  // state zero
+  for (const element of row) {
+    console.log(document.getElementById('e' + row.join('')));
+    
+    if (Number.isInteger(element)) { // first and last row value 
+      const nodeId = document.getElementById('s' + element);
+      console.log(document.getElementById(nodeId));
+
+      for (let i = 0, l = nodeId.children.length; i < l; i++) {
+        const nodeChild = nodeId.children[i];
+        if(nodeChild.classList.contains("background")) {
+          changeColor(nodeChild, "bg-dark", "bg-success");
+        } else if(nodeChild.classList.contains("border")) {
+          changeColor(nodeChild, "border-dark", "border-success");
+        }
+      }
+    } else {
+      //
+    }
+  }
+  // document.getElementById('s0').classList.add("bg-success");
+
+  // method to change graph color
+  function changeColor(element, o, r){
+    element.classList.replace(o, r);
+  }
+
+  
 }
+
+
 
 function clearUi() {
   const transitions = document.getElementById("transitions");
-  // document.getElementById("seqOutput").innerText = "";
+
+
   document.getElementById("outputAll").setAttribute("disabled", "");
   document.getElementById("outputDelayed").setAttribute("disabled", "");
   document.getElementById("outputStepByStep").setAttribute("disabled", "");
 
-  const nodes = document.querySelectorAll(".graphNode");
-  const edges = document.querySelectorAll(".graphEdge");
+  const nodes = document.querySelectorAll(".graph-node");
 
   for (let i = 0, l = nodes.length; i < l; ++i) {
-    nodes[i].removeAttribute("fill");
+    for (let j = 0, cl = nodes[i].children.length; j < cl; j++) {
+
+      const node = nodes[i].children[j];
+
+      if (node.className == "graph-letter") {
+        //
+      } else {
+        //
+      }
+
+    }
   }
 
+  const edges = document.querySelectorAll(".graph-edge");
   for (let i = 0, l = edges.length; i < l; ++i) {
-    edges[i].setAttribute("stroke", "black");
-    edges[i].setAttribute("fill", "black");
+    for (let j = 0, cl = edges[i].children.length; j < cl; j++) {
+      if (edges[i].children[j].className != "edge-bg") {
+        edges[i].children[j].setAttribute("stroke", "#6c757d");
+        edges[i].children[j].setAttribute("fill", "#6c757d");
+      }
+    }
   }
 
   while (transitions.firstChild) {
     transitions.removeChild(transitions.firstChild);
   }
 
-  clearForm();
-
   step = 0;
 }
+
 
 function runAuto() {
   for (let i = 0, l = output.length; i < l; i++) {
@@ -117,86 +168,71 @@ function getRandomSequence(alphabet) {
   return arr;
 }
 
-// @Todo: develop a generator for valid sequences
-
-function clearForm() {
-  const form = document.getElementById("form");
-  form.classList.remove('was-validated');
-  document.getElementById("seqInput").value = "";
-  //   while (tSomeStyleClasses.length) {
-  //     tSomeStyleClasses[0].classList.remove("someStyle");
-  // }
-}
 
 function startMachine(sequence) {
-  // const outputText = document.getElementById("seqOutput");
   const machine = new Dea(sequence);
-  if (machine[0]) {
-    output = machine[1];
-    // outputText.innerText = `Die Zeichenfolge "${sequence}" wurde akzeptiert`;
-    document.getElementById("outputAll").removeAttribute("disabled");
-    document.getElementById("outputDelayed").removeAttribute("disabled");
-    document.getElementById("outputStepByStep").removeAttribute("disabled");
-    document.getElementById("clear-control").removeAttribute("disabled");
-  } else {
-    console.log("Error");
-    // outputText.innerText = `Die Zeichenfolge "${sequence}" wurde nicht akzeptiert`;
-  }
+  // if (machine[0]) {
+  output = machine[1];
+  console.log(output);
+  // outputText.innerText = `Die Zeichenfolge "${sequence}" wurde akzeptiert`;
+  // } else {
+  //   console.log("Error");
+  // outputText.innerText = `Die Zeichenfolge "${sequence}" wurde nicht akzeptiert`;
+  // }
+
+  // To do: clean-up with loop
+  document.getElementById("outputAll").removeAttribute("disabled");
+  document.getElementById("outputDelayed").removeAttribute("disabled");
+  document.getElementById("outputStepByStep").removeAttribute("disabled");
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
   console.log("DOM fully loaded and parsed");
-  const genSeq = document.getElementById("generateSequence");
-  const seqInput = document.getElementById("seqInput");
-  const sigmaPlaceholder = document.getElementById("sigmaPlaceholder");
-  const startDea = document.getElementById("startDea");
-  // const stategraph = document.getElementById("stategraph");
 
   const sigma = ["B", "E", "P", "S", "T", "V", "X"],
-    proof = ["B", "P", "V", "V", "E"];
-  //BTSSXXTVVE
-  // BTXXVPSE
-  // BPVPXVPXVPXVVE
-  // BTSXXVPSE
+    proof = [
+      ["B", "P", "V", "V", "E"],
+      ["B", "T", "S", "S", "X", "X", "T", "V", "V", "E"],
+      ["B", "T", "X", "X", "V", "P", "S", "E"],
+      ["B", "P", "V", "P", "X", "V", "P", "X", "V", "P", "X", "V", "V", "E"],
+      ["B", "T", "S", "X", "X", "V", "P", "S", "E"]
+    ];
+  const userInput = document.getElementById("userInput");
+  const startButton = document.getElementById("startButton");
 
-  document.getElementById("test").addEventListener("click", function () {
-    startMachine(proof);
+  userInput.addEventListener("input", () => {
+    // const valid = userInput.validity.valid;
+    if (userInput.checkValidity()) startButton.setAttribute("data-bs-toggle", "modal");
+    else startButton.removeAttribute("data-bs-toggle", "modal");
   });
 
-  document.getElementById("clear-control").addEventListener("click", function () {
-    clearUi();
+  document.getElementById("random").addEventListener("click", () => {
+    userInput.value = getRandomSequence(sigma).join('');
+    startButton.setAttribute("data-bs-toggle", "modal");
   });
 
-  if (seqInput) {
-    document.getElementById("start").addEventListener("click", () => {
-      seqInput.value = "";
-    });
-  }
-
-  if (sigmaPlaceholder) {
-    sigmaPlaceholder.innerText = sigma;
-  }
-
-  if (genSeq) {
-    genSeq.addEventListener("click", () => {
-      seqInput.value = getRandomSequence(sigma);
-    });
-  }
-
-  // if (document.getElementById("form").classList.contains('was-validated')) {
-  startDea.addEventListener("click", () => {
-    // document.getElementById("form").addEventListener("submit", function () {
-    const input = seqInput.value;
-    // const str = input.replace(",", "").toUpperCase();// To do: check for spaces and other invalid chars
-
-    startMachine(input);
-
-
-
-
+  startButton.addEventListener("click", () => {
+    if (userInput.checkValidity()) {
+      // console.log("Kann losgehen mit " + userInput.value.toUpperCase());
+      startMachine(userInput.value.toUpperCase());
+    }
+    else console.log("Eingabe fehlerhaft!");
   });
-  // }
 
+  /**
+   * Start DEA with random working sequence
+   */
+  document.getElementById("testButton").addEventListener("click", function () {
+    startMachine(proof[randomInt(0, proof.length)]);
+  });
+
+  // document.getElementById("clear").addEventListener("click", function () {
+  //   clearUi();
+  // });
+
+  /**
+   * Controls
+   */
 
   document.getElementById("outputAll").addEventListener("click", runAuto);
 
