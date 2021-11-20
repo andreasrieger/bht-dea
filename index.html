@@ -30,23 +30,22 @@
         <h1>Deterministischer Endlicher Automat (DEA)</h1>
         <p>Teste die Funktion eines endlichen deterministischen Automaten am Beispiel der sog. "Reber Grammar".</p>
         <form id="form" class="row g-3">
-            <!-- <div class="row g-3"> -->
-            <div class="col-sm-7">
+            <div class="col-sm-8">
                 <div class="input-group mb-3">
                     <input type="text" id="userInput" class="form-control has-validation"
                         placeholder="Zeichenkette eingeben" aria-label="Zeichenkette eingeben" aria-describedby="random"
                         minlength="5" maxlength="255" pattern="[BbEePpSsTtVvXx]{5,255}" required>
-                    <button class="btn btn-outline-secondary" type="button" id="random">Neu...</button>
+                    <button class="btn btn-secondary" type="button" id="random">Neu...</button>
                 </div>
             </div>
             <div class="col">
-                <input type="hidden" value="false">
-                <button type="button" id="startButton" class="btn btn-primary me-2" aria-current="page"
-                    data-bs-target="#dea">Start</button>
-                <button type="button" id="testButton" class="btn btn-secondary me-2" aria-current="page"
-                    data-bs-toggle="modal" data-bs-target="#dea">Testen</button>
+                <div class="btn-group" role="mastercontrol" aria-label="Master control">
+                    <button type="button" id="startButton" class="btn btn-primary" aria-current="page"
+                        data-bs-target="#dea">Start</button>
+                    <button type="button" id="testButton" class="btn btn-secondary" aria-current="page"
+                        data-bs-toggle="modal" data-bs-target="#dea">Test</button>
+                </div>
             </div>
-            <!-- </div> -->
         </form>
     </div>
     <div class="container-fluid">
@@ -54,10 +53,14 @@
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Ausgabe</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title">Grafische Darstellung des DEA und Datenausgabe</h5>
+                        <button type="button" id="closeButtonX" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-danger" role="alert">
+                            A simple light alert—check it out!
+                        </div>
                         <div class="row">
                             <div class="col-4">
                                 <div class="card">
@@ -85,8 +88,6 @@
                                         Zustandsgraph
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Deterministischer Endlicher Automat</h5>
-                                        <p class="card-text">Ein (noch) sinnfreier Text.</p>
                                         <svg version="1.1" viewBox="0.0 0.0 974.0 423.0" fill="none" stroke="none"
                                             stroke-linecap="square" stroke-miterlimit="10"
                                             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -96,44 +97,55 @@
                                                 .text-light {
                                                     fill: #f8f9fa
                                                 }
+
                                                 .border-dark {
                                                     stroke: #6c757d
                                                 }
+
                                                 .border-success {
                                                     stroke: #2A8754
                                                 }
+
                                                 .bg-dark {
                                                     fill: #6c757d
                                                 }
+
                                                 .bg-success {
                                                     fill: #2A8754
                                                 }
-                                                
+
+                                                .active-state path.fill {
+                                                    fill: #2A8754
+                                                }
+
+                                                .active-state path.border {
+                                                    stroke: #2A8754
+                                                }
                                                 ]]>
                                             </style>
                                             <clipPath id="p.0">
                                                 <path d="m0 0l974.0 0l0 423.0l-974.0 0l0 -423.0z" clip-rule="nonzero" />
                                             </clipPath>
                                             <g clip-path="url(#p.0)">
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m0 0l974.0 0l0 423.0l-974.0 0z" fill-rule="evenodd" /> -->
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m8.01542 210.35667l49.732285 0" fill-rule="evenodd" /> -->
+                                                <!-- <path class="fill bg-dark" fill-opacity="0.0" d="m0 0l974.0 0l0 423.0l-974.0 0z" fill-rule="evenodd" /> -->
+                                                <!-- <path class="fill bg-dark" fill-opacity="0.0" d="m8.01542 210.35667l49.732285 0" fill-rule="evenodd" /> -->
 
                                                 <g class="graph-edge" id="e0">
-                                                    <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt" d="m8.01542 210.35667l37.732285 0"
-                                                        fill-rule="evenodd" />
-                                                    <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                    <path class="border border-dark" stroke-width="2.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
+                                                        d="m8.01542 210.35667l37.732285 0" fill-rule="evenodd" />
+                                                    <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                         stroke-linecap="butt"
                                                         d="m45.747704 213.66013l9.076195 -3.3034515l-9.076195 -3.3034668z"
                                                         fill-rule="evenodd" />
                                                 </g>
 
                                                 <g class="graph-node" id="s0">
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark"
                                                         d="m57.747704 210.35667l0 0c0 -18.986633 15.414406 -34.37834 34.42904 -34.37834l0 0c9.131149 0 17.888313 3.621994 24.345009 10.069183c6.456703 6.4471893 10.084038 15.191452 10.084038 24.309158l0 0c0 18.986633 -15.414406 34.37834 -34.429047 34.37834l0 0c-19.014633 0 -34.42904 -15.391708 -34.42904 -34.37834z"
                                                         fill-rule="evenodd" />
-                                                    <path class="border border-dark" stroke-width="1.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt"
+                                                    <path class="border border-dark" stroke-width="1.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
                                                         d="m57.747704 210.35667l0 0c0 -18.986633 15.414406 -34.37834 34.42904 -34.37834l0 0c9.131149 0 17.888313 3.621994 24.345009 10.069183c6.456703 6.4471893 10.084038 15.191452 10.084038 24.309158l0 0c0 18.986633 -15.414406 34.37834 -34.429047 34.37834l0 0c-19.014633 0 -34.42904 -15.391708 -34.42904 -34.37834z"
                                                         fill-rule="evenodd" />
                                                     <path class="graph-letter text-light"
@@ -142,11 +154,11 @@
                                                 </g>
 
                                                 <g class="graph-node" id="s1">
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark"
                                                         d="m243.59985 210.23047l0 0c0 -19.000626 15.414398 -34.403687 34.429047 -34.403687l0 0c9.131165 0 17.888306 3.6246643 24.345001 10.076599c6.4566956 6.45195 10.084045 15.202667 10.084045 24.327087l0 0c0 19.00064 -15.414398 34.403687 -34.429047 34.403687l0 0c-19.014648 0 -34.429047 -15.403046 -34.429047 -34.403687z"
                                                         fill-rule="evenodd" />
-                                                    <path class="border border-dark" stroke-width="1.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt"
+                                                    <path class="border border-dark" stroke-width="1.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
                                                         d="m243.59985 210.23047l0 0c0 -19.000626 15.414398 -34.403687 34.429047 -34.403687l0 0c9.131165 0 17.888306 3.6246643 24.345001 10.076599c6.4566956 6.45195 10.084045 15.202667 10.084045 24.327087l0 0c0 19.00064 -15.414398 34.403687 -34.429047 34.403687l0 0c-19.014648 0 -34.429047 -15.403046 -34.429047 -34.403687z"
                                                         fill-rule="evenodd" />
                                                     <path class="graph-letter text-light"
@@ -154,25 +166,48 @@
                                                         fill-rule="nonzero" />
                                                 </g>
 
+                                                <!-- Edge 2S2 -->
+                                                <g class="graph-edge" id="e2S2">
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m346.31274 42.381992l0 0c0 -18.986631 15.414398 -34.378338 34.429047 -34.378338l0 0c9.131134 0 17.888306 3.621993 24.345001 10.069182c6.4566956 6.4471893 10.084045 15.191452 10.084045 24.309155l0 0c0 18.986633 -15.414429 34.378338 -34.429047 34.378338l0 0c-19.014648 0 -34.429047 -15.391705 -34.429047 -34.378338z"
+                                                        fill-rule="evenodd" />
+                                                    <path class="border border-dark" stroke-width="2.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
+                                                        d="m346.31274 42.381992l0 0c0 -18.986631 15.414398 -34.378338 34.429047 -34.378338l0 0c9.131134 0 17.888306 3.621993 24.345001 10.069182c6.4566956 6.4471893 10.084045 15.191452 10.084045 24.309155l0 0c0 18.986633 -15.414429 34.378338 -34.429047 34.378338l0 0c-19.014648 0 -34.429047 -15.391705 -34.429047 -34.378338z"
+                                                        fill-rule="evenodd" />
+                                                    <path class="fill bg-dark"
+                                                        d="m366.5999 43.85699l2.375 -0.21875q0.171875 1.4375 0.78125 2.359375q0.625 0.90625 1.921875 1.484375q1.3125 0.5625 2.9375 0.5625q1.4375 0 2.546875 -0.421875q1.109375 -0.4375 1.640625 -1.1875q0.546875 -0.75 0.546875 -1.640625q0 -0.890625 -0.53125 -1.5625q-0.515625 -0.671875 -1.703125 -1.125q-0.765625 -0.296875 -3.40625 -0.921875q-2.625 -0.640625 -3.671875 -1.203125q-1.375 -0.71875 -2.046875 -1.765625q-0.671875 -1.0625 -0.671875 -2.375q0 -1.453125 0.8125 -2.703125q0.828125 -1.265625 2.40625 -1.90625q1.578125 -0.65625 3.5 -0.65625q2.125 0 3.734375 0.6875q1.625 0.671875 2.5 2.0q0.875 1.328125 0.9375 3.015625l-2.421875 0.1875q-0.1875 -1.8125 -1.3125 -2.734375q-1.125 -0.9375 -3.328125 -0.9375q-2.296875 0 -3.34375 0.84375q-1.046875 0.84375 -1.046875 2.03125q0 1.015625 0.75 1.6875q0.71875 0.65625 3.796875 1.359375q3.078125 0.703125 4.234375 1.21875q1.65625 0.765625 2.453125 1.953125q0.796875 1.171875 0.796875 2.703125q0 1.53125 -0.875 2.875q-0.875 1.34375 -2.515625 2.09375q-1.625 0.75 -3.671875 0.75q-2.59375 0 -4.34375 -0.75q-1.75 -0.765625 -2.75 -2.28125q-0.984375 -1.515625 -1.03125 -3.421875z"
+                                                        fill-rule="nonzero" />
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m361.31494 70.771736l19.065277 6.0339584"
+                                                        fill-rule="evenodd" />
+                                                    <path class="border border-dark" stroke-width="2.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
+                                                        d="m361.31497 70.771736l7.624542 2.4130936"
+                                                        fill-rule="evenodd" />
+                                                    <path class="arrow border border-dark bg-dark" stroke-width="2.0"
+                                                        stroke-linecap="butt"
+                                                        d="m367.94275 76.33432l9.649933 -0.41085052l-7.656372 -5.88813z"
+                                                        fill-rule="evenodd" />
+                                                </g>
                                                 <g class="graph-node" id="s2">
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark"
                                                         d="m380.36993 76.76033l0 0c0 -18.986633 15.414429 -34.378338 34.429047 -34.378338l0 0c9.131165 0 17.888306 3.621994 24.345032 10.069183c6.4566956 6.4471893 10.084015 15.191456 10.084015 24.309155l0 0c0 18.986633 -15.414398 34.378334 -34.429047 34.378334l0 0c-19.014618 0 -34.429047 -15.391701 -34.429047 -34.378334z"
                                                         fill-rule="evenodd" />
-                                                    <path class="border border-dark" stroke-width="1.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt"
+                                                    <path class="border border-dark" stroke-width="1.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
                                                         d="m380.36993 76.76033l0 0c0 -18.986633 15.414429 -34.378338 34.429047 -34.378338l0 0c9.131165 0 17.888306 3.621994 24.345032 10.069183c6.4566956 6.4471893 10.084015 15.191456 10.084015 24.309155l0 0c0 18.986633 -15.414398 34.378334 -34.429047 34.378334l0 0c-19.014618 0 -34.429047 -15.391701 -34.429047 -34.378334z"
                                                         fill-rule="evenodd" />
                                                     <path class="graph-letter text-light"
                                                         d="m420.4349 84.11033l0 2.25l-12.609375 0q-0.03125 -0.84375 0.265625 -1.625q0.484375 -1.296875 1.546875 -2.546875q1.0625 -1.25 3.0625 -2.875q3.109375 -2.5625 4.203125 -4.046875q1.09375 -1.5 1.09375 -2.8125q0 -1.40625 -1.0 -2.359375q-0.984375 -0.953125 -2.59375 -0.953125q-1.6875 0 -2.703125 1.015625q-1.015625 1.015625 -1.03125 2.8125l-2.40625 -0.25q0.25 -2.6875 1.859375 -4.09375q1.609375 -1.421875 4.328125 -1.421875q2.75 0 4.34375 1.53125q1.609375 1.515625 1.609375 3.765625q0 1.140625 -0.46875 2.25q-0.46875 1.109375 -1.5625 2.328125q-1.078125 1.21875 -3.609375 3.359375q-2.09375 1.765625 -2.703125 2.40625q-0.59375 0.625 -0.984375 1.265625l9.359375 0z"
                                                         fill-rule="nonzero" />
                                                 </g>
-
                                                 <g class="graph-node" id="s3">
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark"
                                                         d="m581.4402 76.76033l0 0c0 -18.986633 15.414429 -34.378338 34.429016 -34.378338l0 0c9.131165 0 17.888367 3.621994 24.345032 10.069183c6.456726 6.4471893 10.084045 15.191456 10.084045 24.309155l0 0c0 18.986633 -15.414429 34.378334 -34.429077 34.378334l0 0c-19.014587 0 -34.429016 -15.391701 -34.429016 -34.378334z"
                                                         fill-rule="evenodd" />
-                                                    <path class="border border-dark" stroke-width="1.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt"
+                                                    <path class="border border-dark" stroke-width="1.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
                                                         d="m581.4402 76.76033l0 0c0 -18.986633 15.414429 -34.378338 34.429016 -34.378338l0 0c9.131165 0 17.888367 3.621994 24.345032 10.069183c6.456726 6.4471893 10.084045 15.191456 10.084045 24.309155l0 0c0 18.986633 -15.414429 34.378334 -34.429077 34.378334l0 0c-19.014587 0 -34.429016 -15.391701 -34.429016 -34.378334z"
                                                         fill-rule="evenodd" />
                                                     <path class="graph-letter text-light"
@@ -184,21 +219,21 @@
                                                     <path class="edge-bg" fill="#000000" fill-opacity="0.0"
                                                         d="m346.31274 378.03134l0 0c0 -18.986633 15.414398 -34.378326 34.429047 -34.378326l0 0c9.131134 0 17.888306 3.6220093 24.345001 10.069183c6.4566956 6.447174 10.084045 15.191467 10.084045 24.309143l0 0c0 18.986633 -15.414429 34.378357 -34.429047 34.378357l0 0c-19.014648 0 -34.429047 -15.391724 -34.429047 -34.378357z"
                                                         fill-rule="evenodd" />
-                                                    <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt"
+                                                    <path class="border border-dark" stroke-width="2.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
                                                         d="m346.31274 378.03134l0 0c0 -18.986633 15.414398 -34.378326 34.429047 -34.378326l0 0c9.131134 0 17.888306 3.6220093 24.345001 10.069183c6.4566956 6.447174 10.084045 15.191467 10.084045 24.309143l0 0c0 18.986633 -15.414429 34.378357 -34.429047 34.378357l0 0c-19.014648 0 -34.429047 -15.391724 -34.429047 -34.378357z"
                                                         fill-rule="evenodd" />
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark"
                                                         d="m372.30304 389.63135l0 -16.828125l-6.28125 0l0 -2.25l15.125 0l0 2.25l-6.3125 0l0 16.828125l-2.53125 0z"
                                                         fill-rule="nonzero" />
                                                     <path class="wtf" fill="#000000" fill-opacity="0.0"
                                                         d="m361.52438 349.68698l19.212616 -6.047241"
                                                         fill-rule="evenodd" />
-                                                    <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt"
+                                                    <path class="border border-dark" stroke-width="2.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
                                                         d="m361.5244 349.68698l7.7661743 -2.444458"
                                                         fill-rule="evenodd" />
-                                                    <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                    <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                         stroke-linecap="butt"
                                                         d="m370.2824 350.3936l7.66568 -5.8760376l-9.649292 -0.42608643z"
                                                         fill-rule="evenodd" />
@@ -206,11 +241,11 @@
 
 
                                                 <g class="graph-node" id="s4">
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark"
                                                         d="m380.34882 343.653l0 0c0 -18.986633 15.414429 -34.378326 34.429047 -34.378326l0 0c9.131165 0 17.888336 3.6219788 24.345032 10.069183c6.4566956 6.447174 10.084015 15.191437 10.084015 24.309143l0 0c0 18.986633 -15.414398 34.378326 -34.429047 34.378326l0 0c-19.014618 0 -34.429047 -15.391693 -34.429047 -34.378326z"
                                                         fill-rule="evenodd" />
-                                                    <path class="border border-dark" stroke-width="1.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt"
+                                                    <path class="border border-dark" stroke-width="1.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
                                                         d="m380.34882 343.653l0 0c0 -18.986633 15.414429 -34.378326 34.429047 -34.378326l0 0c9.131165 0 17.888336 3.6219788 24.345032 10.069183c6.4566956 6.447174 10.084015 15.191437 10.084015 24.309143l0 0c0 18.986633 -15.414398 34.378326 -34.429047 34.378326l0 0c-19.014618 0 -34.429047 -15.391693 -34.429047 -34.378326z"
                                                         fill-rule="evenodd" />
                                                     <path class="graph-letter text-light"
@@ -219,11 +254,11 @@
                                                 </g>
 
                                                 <g class="graph-node" id="s5">
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark"
                                                         d="m581.4402 343.653l0 0c0 -18.986633 15.414429 -34.378326 34.429016 -34.378326l0 0c9.131165 0 17.888367 3.6219788 24.345032 10.069183c6.456726 6.447174 10.084045 15.191437 10.084045 24.309143l0 0c0 18.986633 -15.414429 34.378326 -34.429077 34.378326l0 0c-19.014587 0 -34.429016 -15.391693 -34.429016 -34.378326z"
                                                         fill-rule="evenodd" />
-                                                    <path class="border border-dark" stroke-width="1.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt"
+                                                    <path class="border border-dark" stroke-width="1.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
                                                         d="m581.4402 343.653l0 0c0 -18.986633 15.414429 -34.378326 34.429016 -34.378326l0 0c9.131165 0 17.888367 3.6219788 24.345032 10.069183c6.456726 6.447174 10.084045 15.191437 10.084045 24.309143l0 0c0 18.986633 -15.414429 34.378326 -34.429077 34.378326l0 0c-19.014587 0 -34.429016 -15.391693 -34.429016 -34.378326z"
                                                         fill-rule="evenodd" />
                                                     <path class="graph-letter text-light"
@@ -232,11 +267,11 @@
                                                 </g>
 
                                                 <g class="graph-node" id="s6">
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark"
                                                         d="m713.3695 210.35667l0 0c0 -18.986633 15.414368 -34.37834 34.429016 -34.37834l0 0c9.131165 0 17.888306 3.621994 24.345032 10.069183c6.456665 6.4471893 10.083984 15.191452 10.083984 24.309158l0 0c0 18.986633 -15.414368 34.37834 -34.429016 34.37834l0 0c-19.014648 0 -34.429016 -15.391708 -34.429016 -34.37834z"
                                                         fill-rule="evenodd" />
-                                                    <path class="border border-dark" stroke-width="1.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt"
+                                                    <path class="border border-dark" stroke-width="1.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
                                                         d="m713.3695 210.35667l0 0c0 -18.986633 15.414368 -34.37834 34.429016 -34.37834l0 0c9.131165 0 17.888306 3.621994 24.345032 10.069183c6.456665 6.4471893 10.083984 15.191452 10.083984 24.309158l0 0c0 18.986633 -15.414368 34.37834 -34.429016 34.37834l0 0c-19.014648 0 -34.429016 -15.391708 -34.429016 -34.37834z"
                                                         fill-rule="evenodd" />
                                                     <path class="graph-letter text-light"
@@ -245,16 +280,16 @@
                                                 </g>
 
                                                 <g class="graph-node" id="s7">
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark"
                                                         d="m899.1676 210.20695l0 0c0 -18.992294 15.413818 -34.38858 34.427673 -34.38858l0 0c9.130859 0 17.887634 3.6230621 24.344116 10.072174c6.456421 6.449112 10.083618 15.195984 10.083618 24.316406l0 0c0 18.99228 -15.413818 34.38858 -34.427734 34.38858l0 0c-19.013855 0 -34.427673 -15.396301 -34.427673 -34.38858z"
                                                         fill-rule="evenodd" />
-                                                    <path class="border border-dark" stroke-width="1.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt"
+                                                    <path class="border border-dark" stroke-width="1.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
                                                         d="m899.1676 210.20695l0 0c0 -18.992294 15.413818 -34.38858 34.427673 -34.38858l0 0c9.130859 0 17.887634 3.6230621 24.344116 10.072174c6.456421 6.449112 10.083618 15.195984 10.083618 24.316406l0 0c0 18.99228 -15.413818 34.38858 -34.427734 34.38858l0 0c-19.013855 0 -34.427673 -15.396301 -34.427673 -34.38858z"
                                                         fill-rule="evenodd" />
-                                                    <!-- <path fill="#000000" fill-opacity="0.0"
-                                    d="m902.9059 210.19733l0 0c0 -16.951218 13.741699 -30.692917 30.692932 -30.692917l0 0c8.140259 0 15.947144 3.2337189 21.703186 8.989746c5.7560425 5.7560425 8.989746 13.562912 8.989746 21.70317l0 0c0 16.951233 -13.741699 30.692917 -30.692932 30.692917l0 0c-16.951233 0 -30.692932 -13.741684 -30.692932 -30.692917z"
-                                    fill-rule="evenodd" /> -->
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m902.9059 210.19733l0 0c0 -16.951218 13.741699 -30.692917 30.692932 -30.692917l0 0c8.140259 0 15.947144 3.2337189 21.703186 8.989746c5.7560425 5.7560425 8.989746 13.562912 8.989746 21.70317l0 0c0 16.951233 -13.741699 30.692917 -30.692932 30.692917l0 0c-16.951233 0 -30.692932 -13.741684 -30.692932 -30.692917z"
+                                                        fill-rule="evenodd" />
                                                     <path stroke="#f8f9fa" stroke-width="2.0" stroke-linejoin="round"
                                                         stroke-linecap="butt"
                                                         d="m902.9059 210.19733l0 0c0 -16.951218 13.741699 -30.692917 30.692932 -30.692917l0 0c8.140259 0 15.947144 3.2337189 21.703186 8.989746c5.7560425 5.7560425 8.989746 13.562912 8.989746 21.70317l0 0c0 16.951233 -13.741699 30.692917 -30.692932 30.692917l0 0c-16.951233 0 -30.692932 -13.741684 -30.692932 -30.692917z"
@@ -264,214 +299,215 @@
                                                         fill-rule="nonzero" />
                                                 </g>
 
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m126.60579 210.35667l117.00787 -0.12597656" fill-rule="evenodd" /> -->
+
 
                                                 <g class="graph-edge" id="e0B1">
-                                                    <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt"
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m126.60579 210.35667l117.00787 -0.12597656"
+                                                        fill-rule="evenodd" />
+                                                    <path class="border border-dark" stroke-width="2.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
                                                         d="m126.60579 210.35667l105.00787 -0.11306763"
                                                         fill-rule="evenodd" />
-                                                    <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                    <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                         stroke-linecap="butt"
                                                         d="m231.61722 213.54707l9.072647 -3.3132477l-9.079758 -3.293686z"
                                                         fill-rule="evenodd" />
-                                                    <!-- <path fill="#000000" fill-opacity="0.0" d="m161.70122 158.48805l49.732285 0l0 51.716522l-49.732285 0z"
-                                    fill-rule="evenodd" /> -->
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m161.70122 158.48805l49.732285 0l0 51.716522l-49.732285 0z"
+                                                        fill-rule="evenodd" />
+                                                    <path class="fill bg-dark"
                                                         d="m172.65434 193.08804l0 -19.078125l7.15625 0q2.1875 0 3.5 0.578125q1.328125 0.578125 2.078125 1.78125q0.75 1.203125 0.75 2.515625q0 1.21875 -0.671875 2.3125q-0.65625 1.078125 -2.0 1.734375q1.734375 0.515625 2.65625 1.734375q0.9375 1.21875 0.9375 2.890625q0 1.34375 -0.5625 2.5q-0.5625 1.140625 -1.40625 1.765625q-0.828125 0.625 -2.09375 0.953125q-1.25 0.3125 -3.0625 0.3125l-7.28125 0zm2.53125 -11.0625l4.125 0q1.671875 0 2.40625 -0.21875q0.953125 -0.296875 1.4375 -0.953125q0.5 -0.671875 0.5 -1.671875q0 -0.9375 -0.453125 -1.65625q-0.453125 -0.734375 -1.3125 -1.0q-0.84375 -0.265625 -2.890625 -0.265625l-3.8125 0l0 5.765625zm0 8.8125l4.75 0q1.21875 0 1.71875 -0.09375q0.859375 -0.15625 1.4375 -0.515625q0.59375 -0.375 0.96875 -1.0625q0.390625 -0.703125 0.390625 -1.609375q0 -1.0625 -0.546875 -1.84375q-0.546875 -0.796875 -1.515625 -1.109375q-0.96875 -0.328125 -2.796875 -0.328125l-4.40625 0l0 6.5625z"
                                                         fill-rule="nonzero" />
                                                 </g>
 
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m302.3739 185.90338l88.09451 -84.81889" fill-rule="evenodd" /> -->
+
 
                                                 <g class="graph-edge" id="e1T2">
-                                                    <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt" d="m302.3739 185.90338l79.45001 -76.49584"
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m302.3739 185.90338l88.09451 -84.81889"
                                                         fill-rule="evenodd" />
-                                                    <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                    <path class="border border-dark" stroke-width="2.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
+                                                        d="m302.3739 185.90338l79.45001 -76.49584"
+                                                        fill-rule="evenodd" />
+                                                    <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                         stroke-linecap="butt"
                                                         d="m384.11514 111.78726l4.2470093 -8.674858l-8.829498 3.915413z"
                                                         fill-rule="evenodd" />
-                                                    <!-- <path fill="#000000" fill-opacity="0.0" d="m302.861 95.12977l49.73227 0l0 51.71653l-49.73227 0z"
-                                    fill-rule="evenodd" /> -->
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m302.861 95.12977l49.73227 0l0 51.71653l-49.73227 0z"
+                                                        fill-rule="evenodd" />
+                                                    <path class="fill bg-dark"
                                                         d="m318.76724 129.72977l0 -16.828125l-6.28125 0l0 -2.25l15.125 0l0 2.25l-6.3125 0l0 16.828125l-2.53125 0z"
                                                         fill-rule="nonzero" />
                                                 </g>
 
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m302.3739 234.55756l88.06299 84.787384" fill-rule="evenodd" /> -->
 
                                                 <g class="graph-edge" id="e1P4">
-                                                    <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt" d="m302.3739 234.55756l79.41846 76.46442"
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m302.3739 234.55756l88.06299 84.787384"
                                                         fill-rule="evenodd" />
-                                                    <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                    <path class="border border-dark" stroke-width="2.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
+                                                        d="m302.3739 234.55756l79.41846 76.46442" fill-rule="evenodd" />
+                                                    <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                         stroke-linecap="butt"
                                                         d="m379.50113 313.4017l8.829498 3.9153442l-4.24704 -8.674805z"
                                                         fill-rule="evenodd" />
-                                                    <!-- <path fill="#000000" fill-opacity="0.0" d="m302.861 263.30093l49.73227 0l0 51.716522l-49.73227 0z"
-                                    fill-rule="evenodd" /> -->
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m302.861 263.30093l49.73227 0l0 51.716522l-49.73227 0z"
+                                                        fill-rule="evenodd" />
+                                                    <path class="fill bg-dark"
                                                         d="m313.9235 297.90094l0 -19.078125l7.1875 0q1.90625 0 2.90625 0.171875q1.40625 0.234375 2.359375 0.90625q0.953125 0.65625 1.53125 1.84375q0.578125 1.171875 0.578125 2.59375q0 2.4375 -1.5625 4.125q-1.546875 1.6875 -5.59375 1.6875l-4.890625 0l0 7.75l-2.515625 0zm2.515625 -10.015625l4.9375 0q2.453125 0 3.46875 -0.90625q1.03125 -0.90625 1.03125 -2.5625q0 -1.203125 -0.609375 -2.046875q-0.59375 -0.859375 -1.59375 -1.125q-0.625 -0.171875 -2.34375 -0.171875l-4.890625 0l0 6.8125z"
                                                         fill-rule="nonzero" />
                                                 </g>
 
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m449.22803 76.76033l132.22046 0" fill-rule="evenodd" /> -->
 
                                                 <g class="graph-edge" id="e2X3">
-                                                    <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt" d="m449.22803 76.76033l120.22046 0"
-                                                        fill-rule="evenodd" />
-                                                    <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m449.22803 76.76033l132.22046 0" fill-rule="evenodd" />
+                                                    <path class="border border-dark" stroke-width="2.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
+                                                        d="m449.22803 76.76033l120.22046 0" fill-rule="evenodd" />
+                                                    <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                         stroke-linecap="butt"
                                                         d="m569.4485 80.0638l9.076172 -3.3034668l-9.076172 -3.3034668z"
                                                         fill-rule="evenodd" />
-                                                    <!-- <path fill="#000000" fill-opacity="0.0" d="m484.95505 24.43535l49.73227 0l0 51.716537l-49.73227 0z"
-                                        fill-rule="evenodd" /> -->
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m484.95505 24.43535l49.73227 0l0 51.716537l-49.73227 0z"
+                                                        fill-rule="evenodd" />
+                                                    <path class="fill bg-dark"
                                                         d="m494.06442 59.035347l7.390625 -9.9375l-6.515625 -9.140625l3.015625 0l3.453125 4.890625q1.078125 1.515625 1.546875 2.34375q0.625 -1.046875 1.5 -2.171875l3.84375 -5.0625l2.75 0l-6.703125 8.984375l7.21875 10.09375l-3.125 0l-4.796875 -6.8125q-0.40625 -0.578125 -0.84375 -1.265625q-0.625 1.03125 -0.90625 1.421875l-4.78125 6.65625l-3.046875 0z"
                                                         fill-rule="nonzero" />
                                                 </g>
 
-                                                <path fill="#000000" fill-opacity="0.0"
-                                                    d="m449.2069 343.653l132.22046 0" fill-rule="evenodd" />
 
                                                 <g class="graph-edge" id="e4V5">
-                                                    <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                        stroke-linecap="butt" d="m449.2069 343.653l120.22046 0"
-                                                        fill-rule="evenodd" />
-                                                    <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m449.2069 343.653l132.22046 0" fill-rule="evenodd" />
+                                                    <path class="border border-dark" stroke-width="2.0"
+                                                        stroke-linejoin="round" stroke-linecap="butt"
+                                                        d="m449.2069 343.653l120.22046 0" fill-rule="evenodd" />
+                                                    <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                         stroke-linecap="butt"
                                                         d="m569.42737 346.95648l9.076172 -3.3034668l-9.076172 -3.3034668z"
                                                         fill-rule="evenodd" />
-
-                                                    <!-- <path fill="#000000" fill-opacity="0.0" d="m484.95505 289.45615l49.73227 0l0 51.716553l-49.73227 0z"
-                                fill-rule="evenodd" /> -->
-
-                                                    <path class="background bg-dark"
+                                                    <path class="fill bg-dark" fill-opacity="0.0"
+                                                        d="m484.95505 289.45615l49.73227 0l0 51.716553l-49.73227 0z"
+                                                        fill-rule="evenodd" />
+                                                    <path class="fill bg-dark"
                                                         d="m501.47067 324.05615l-7.40625 -19.078125l2.734375 0l4.96875 13.859375q0.59375 1.671875 1.0 3.125q0.4375 -1.5625 1.03125 -3.125l5.15625 -13.859375l2.578125 0l-7.484375 19.078125l-2.578125 0z"
                                                         fill-rule="nonzero" />
                                                 </g>
 
 
                                             </g>
-                                            <!-- <path fill="#000000" fill-opacity="0.0" d="m640.21423 101.06949l83.24408 84.97638" fill-rule="evenodd" /> -->
 
                                             <g class="graph-edge" id="e3S6">
-                                                <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                    stroke-linecap="butt" d="m640.21423 101.06948l74.84662 76.4042"
-                                                    fill-rule="evenodd" />
-                                                <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                <path class="fill bg-dark" fill-opacity="0.0"
+                                                    d="m640.21423 101.06949l83.24408 84.97638" fill-rule="evenodd" />
+                                                <path class="border border-dark" stroke-width="2.0"
+                                                    stroke-linejoin="round" stroke-linecap="butt"
+                                                    d="m640.21423 101.06948l74.84662 76.4042" fill-rule="evenodd" />
+                                                <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                     stroke-linecap="butt"
                                                     d="m712.70105 179.78539l8.711243 4.1718597l-3.9915771 -8.795303z"
                                                     fill-rule="evenodd" />
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m675.04987 95.12977l49.7323 0l0 51.71653l-49.7323 0z"
-                                fill-rule="evenodd" /> -->
-                                                <path class="background bg-dark"
+                                                <path class="fill bg-dark" fill-opacity="0.0"
+                                                    d="m675.04987 95.12977l49.7323 0l0 51.71653l-49.7323 0z"
+                                                    fill-rule="evenodd" />
+                                                <path class="fill bg-dark"
                                                     d="m685.253 123.60477l2.375 -0.21875q0.171875 1.4375 0.78125 2.359375q0.625 0.90625 1.921875 1.484375q1.3125 0.5625 2.9375 0.5625q1.4375 0 2.546875 -0.421875q1.109375 -0.4375 1.640625 -1.1875q0.546875 -0.75 0.546875 -1.640625q0 -0.890625 -0.53125 -1.5625q-0.515625 -0.671875 -1.703125 -1.125q-0.765625 -0.296875 -3.40625 -0.921875q-2.625 -0.640625 -3.671875 -1.203125q-1.375 -0.71875 -2.046875 -1.765625q-0.671875 -1.0625 -0.671875 -2.375q0 -1.453125 0.8125 -2.703125q0.828125 -1.265625 2.40625 -1.90625q1.578125 -0.65625 3.5 -0.65625q2.125 0 3.734375 0.6875q1.625 0.671875 2.5 2.0q0.875 1.328125 0.9375 3.015625l-2.421875 0.1875q-0.1875 -1.8125 -1.3125 -2.734375q-1.125 -0.9375 -3.328125 -0.9375q-2.296875 0 -3.34375 0.84375q-1.046875 0.84375 -1.046875 2.03125q0 1.015625 0.75 1.6875q0.71875 0.65625 3.796875 1.359375q3.078125 0.703125 4.234375 1.21875q1.65625 0.765625 2.453125 1.953125q0.796875 1.171875 0.796875 2.703125q0 1.53125 -0.875 2.875q-0.875 1.34375 -2.515625 2.09375q-1.625 0.75 -3.671875 0.75q-2.59375 0 -4.34375 -0.75q-1.75 -0.765625 -2.75 -2.28125q-0.984375 -1.515625 -1.03125 -3.421875z"
                                                     fill-rule="nonzero" />
                                             </g>
 
-                                            <!-- <path fill="#000000" fill-opacity="0.0" d="m640.21423 319.34387l83.24408 -84.69292" fill-rule="evenodd" /> -->
 
                                             <g class="graph-edge" id="e5V6">
-                                                <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                    stroke-linecap="butt" d="m640.21423 319.34384l74.83234 -76.134735"
-                                                    fill-rule="evenodd" />
-                                                <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                <path class="fill bg-dark" fill-opacity="0.0"
+                                                    d="m640.21423 319.34387l83.24408 -84.69292" fill-rule="evenodd" />
+                                                <path class="border border-dark" stroke-width="2.0"
+                                                    stroke-linejoin="round" stroke-linecap="butt"
+                                                    d="m640.21423 319.34384l74.83234 -76.134735" fill-rule="evenodd" />
+                                                <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                     stroke-linecap="butt"
                                                     d="m717.4025 245.52477l4.0062866 -8.78862l-8.718201 4.157303z"
                                                     fill-rule="evenodd" />
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m675.04987 263.30093l49.7323 0l0 51.716522l-49.7323 0z"
-                                fill-rule="evenodd" /> -->
-                                                <path class="background bg-dark"
+                                                <path class="fill bg-dark" fill-opacity="0.0"
+                                                    d="m675.04987 263.30093l49.7323 0l0 51.716522l-49.7323 0z"
+                                                    fill-rule="evenodd" />
+                                                <path class="fill bg-dark"
                                                     d="m691.5655 297.90094l-7.40625 -19.078125l2.734375 0l4.96875 13.859375q0.59375 1.671875 1.0 3.125q0.4375 -1.5625 1.03125 -3.125l5.15625 -13.859375l2.578125 0l-7.484375 19.078125l-2.578125 0z"
                                                     fill-rule="nonzero" />
                                             </g>
 
                                             <g class="graph-edge" id="e6E7">
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m782.22754 210.35667l116.944885 -0.1574707" fill-rule="evenodd" /> -->
-                                                <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                    stroke-linecap="butt" d="m782.2276 210.35667l104.944885 -0.1413269"
+                                                <path class="fill bg-dark" fill-opacity="0.0"
+                                                    d="m782.22754 210.35667l116.944885 -0.1574707"
                                                     fill-rule="evenodd" />
-                                                <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                <path class="border border-dark" stroke-width="2.0"
+                                                    stroke-linejoin="round" stroke-linecap="butt"
+                                                    d="m782.2276 210.35667l104.944885 -0.1413269" fill-rule="evenodd" />
+                                                <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                     stroke-linecap="butt"
                                                     d="m887.17694 213.51881l9.071777 -3.315689l-9.080688 -3.2912445z"
                                                     fill-rule="evenodd" />
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m815.8434 158.48805l49.7323 0l0 51.716522l-49.7323 0z"
-                                fill-rule="evenodd" /> -->
-                                                <path class="background bg-dark"
+                                                <path class="fill bg-dark" fill-opacity="0.0"
+                                                    d="m815.8434 158.48805l49.7323 0l0 51.716522l-49.7323 0z"
+                                                    fill-rule="evenodd" />
+                                                <path class="fill bg-dark"
                                                     d="m826.95276 193.08804l0 -19.078125l13.796875 0l0 2.25l-11.265625 0l0 5.84375l10.546875 0l0 2.234375l-10.546875 0l0 6.5l11.703125 0l0 2.25l-14.234375 0z"
                                                     fill-rule="nonzero" />
                                             </g>
 
-                                            <!-- <path fill="#000000" fill-opacity="0.0" d="m591.52423 101.06949l-152.40945 218.2677" fill-rule="evenodd" /> -->
 
                                             <g class="graph-edge" id="e3X4">
-                                                <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                    stroke-linecap="butt" d="m591.52423 101.06948l-145.53934 208.42892"
-                                                    fill-rule="evenodd" />
-                                                <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                <path class="fill bg-dark" fill-opacity="0.0"
+                                                    d="m591.52423 101.06949l-152.40945 218.2677" fill-rule="evenodd" />
+                                                <path class="border border-dark" stroke-width="2.0"
+                                                    stroke-linejoin="round" stroke-linecap="butt"
+                                                    d="m591.52423 101.06948l-145.53934 208.42892" fill-rule="evenodd" />
+                                                <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                     stroke-linecap="butt"
                                                     d="m443.2764 307.60718l-2.4877014 9.332794l7.9046936 -5.550293z"
                                                     fill-rule="evenodd" />
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m474.68295 158.48805l49.73227 0l0 51.716522l-49.73227 0z"
-                                fill-rule="evenodd" /> -->
-                                                <path class="background bg-dark"
+                                                <path class="graph-letter" fill="#000000" fill-opacity="0.0"
+                                                    d="m474.68295 158.48805l49.73227 0l0 51.716522l-49.73227 0z"
+                                                    fill-rule="evenodd" />
+                                                <path class="graph-letter fill bg-dark"
                                                     d="m483.79233 193.08804l7.390625 -9.9375l-6.515625 -9.140625l3.015625 0l3.453125 4.890625q1.078125 1.515625 1.546875 2.34375q0.625 -1.046875 1.5 -2.171875l3.84375 -5.0625l2.75 0l-6.703125 8.984375l7.21875 10.09375l-3.125 0l-4.796875 -6.8125q-0.40625 -0.578125 -0.84375 -1.265625q-0.625 1.03125 -0.90625 1.421875l-4.78125 6.65625l-3.046875 0z"
                                                     fill-rule="nonzero" />
                                             </g>
 
-                                            <!-- <path fill="#000000" fill-opacity="0.0" d="m615.8692 309.2747l0 -198.14174" fill-rule="evenodd" /> -->
+
 
                                             <g class="graph-edge" id="e5P3">
-                                                <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                    stroke-linecap="butt" d="m615.8692 309.2747l0 -186.14175"
-                                                    fill-rule="evenodd" />
-                                                <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
+                                                <path class="fill bg-dark" fill-opacity="0.0"
+                                                    d="m615.8692 309.2747l0 -198.14174" fill-rule="evenodd" />
+                                                <path class="border border-dark" stroke-width="2.0"
+                                                    stroke-linejoin="round" stroke-linecap="butt"
+                                                    d="m615.8692 309.2747l0 -186.14175" fill-rule="evenodd" />
+                                                <path class="arrow border border-dark bg-dark" stroke-width="2.0"
                                                     stroke-linecap="butt"
                                                     d="m619.17267 123.13294l-3.3034668 -9.076195l-3.3034668 9.076195z"
                                                     fill-rule="evenodd" />
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m611.26776 158.48805l49.7323 0l0 51.716522l-49.7323 0z"
-                                fill-rule="evenodd" /> -->
-                                                <path class="background bg-dark"
+                                                <path class="fill bg-dark" fill-opacity="0.0"
+                                                    d="m611.26776 158.48805l49.7323 0l0 51.716522l-49.7323 0z"
+                                                    fill-rule="evenodd" />
+                                                <path class="fill bg-dark"
                                                     d="m622.33026 193.08804l0 -19.078125l7.1875 0q1.90625 0 2.90625 0.171875q1.40625 0.234375 2.359375 0.90625q0.953125 0.65625 1.53125 1.84375q0.578125 1.171875 0.578125 2.59375q0 2.4375 -1.5625 4.125q-1.546875 1.6875 -5.59375 1.6875l-4.890625 0l0 7.75l-2.515625 0zm2.515625 -10.015625l4.9375 0q2.453125 0 3.46875 -0.90625q1.03125 -0.90625 1.03125 -2.5625q0 -1.203125 -0.609375 -2.046875q-0.59375 -0.859375 -1.59375 -1.125q-0.625 -0.171875 -2.34375 -0.171875l-4.890625 0l0 6.8125z"
                                                     fill-rule="nonzero" />
                                             </g>
-
-                                            <!-- Edge 2S2 -->
-                                            <g class="graph-edge" id="e2S2">
-                                                <!-- <path fill="#000000" fill-opacity="0.0"
-                                d="m346.31274 42.381992l0 0c0 -18.986631 15.414398 -34.378338 34.429047 -34.378338l0 0c9.131134 0 17.888306 3.621993 24.345001 10.069182c6.4566956 6.4471893 10.084045 15.191452 10.084045 24.309155l0 0c0 18.986633 -15.414429 34.378338 -34.429047 34.378338l0 0c-19.014648 0 -34.429047 -15.391705 -34.429047 -34.378338z"
-                                fill-rule="evenodd" /> -->
-                                                <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                    stroke-linecap="butt"
-                                                    d="m346.31274 42.381992l0 0c0 -18.986631 15.414398 -34.378338 34.429047 -34.378338l0 0c9.131134 0 17.888306 3.621993 24.345001 10.069182c6.4566956 6.4471893 10.084045 15.191452 10.084045 24.309155l0 0c0 18.986633 -15.414429 34.378338 -34.429047 34.378338l0 0c-19.014648 0 -34.429047 -15.391705 -34.429047 -34.378338z"
-                                                    fill-rule="evenodd" />
-                                                <path class="background bg-dark"
-                                                    d="m366.5999 43.85699l2.375 -0.21875q0.171875 1.4375 0.78125 2.359375q0.625 0.90625 1.921875 1.484375q1.3125 0.5625 2.9375 0.5625q1.4375 0 2.546875 -0.421875q1.109375 -0.4375 1.640625 -1.1875q0.546875 -0.75 0.546875 -1.640625q0 -0.890625 -0.53125 -1.5625q-0.515625 -0.671875 -1.703125 -1.125q-0.765625 -0.296875 -3.40625 -0.921875q-2.625 -0.640625 -3.671875 -1.203125q-1.375 -0.71875 -2.046875 -1.765625q-0.671875 -1.0625 -0.671875 -2.375q0 -1.453125 0.8125 -2.703125q0.828125 -1.265625 2.40625 -1.90625q1.578125 -0.65625 3.5 -0.65625q2.125 0 3.734375 0.6875q1.625 0.671875 2.5 2.0q0.875 1.328125 0.9375 3.015625l-2.421875 0.1875q-0.1875 -1.8125 -1.3125 -2.734375q-1.125 -0.9375 -3.328125 -0.9375q-2.296875 0 -3.34375 0.84375q-1.046875 0.84375 -1.046875 2.03125q0 1.015625 0.75 1.6875q0.71875 0.65625 3.796875 1.359375q3.078125 0.703125 4.234375 1.21875q1.65625 0.765625 2.453125 1.953125q0.796875 1.171875 0.796875 2.703125q0 1.53125 -0.875 2.875q-0.875 1.34375 -2.515625 2.09375q-1.625 0.75 -3.671875 0.75q-2.59375 0 -4.34375 -0.75q-1.75 -0.765625 -2.75 -2.28125q-0.984375 -1.515625 -1.03125 -3.421875z"
-                                                    fill-rule="nonzero" />
-                                                <!-- <path fill="#000000" fill-opacity="0.0" d="m361.31494 70.771736l19.065277 6.0339584" fill-rule="evenodd" /> -->
-                                                <path class="border border-dark" stroke-width="2.0" stroke-linejoin="round"
-                                                    stroke-linecap="butt" d="m361.31497 70.771736l7.624542 2.4130936"
-                                                    fill-rule="evenodd" />
-                                                <path class="background bg-dark" stroke="#6c757d" stroke-width="2.0"
-                                                    stroke-linecap="butt"
-                                                    d="m367.94275 76.33432l9.649933 -0.41085052l-7.656372 -5.88813z"
-                                                    fill-rule="evenodd" />
-                                            </g>
-
                                         </svg>
                                     </div>
                                     <div class="card-footer">
                                         <div class="d-flex justify-content-center">
                                             <button type="button" id="outputAll"
-                                                class="btn btn-primary me-2 output-control"
-                                                disabled>Schnelldurchlauf</button>
+                                                class="btn btn-primary me-2 output-control">Schnelldurchlauf</button>
                                             <div class="dropdown">
                                                 <button class="btn btn-primary dropdown-toggle me-2 output-control"
                                                     type="button" id="outputDelayed" data-bs-toggle="dropdown"
-                                                    aria-expanded="false" disabled>
+                                                    aria-expanded="false">
                                                     Starte Animation mit Intervall von...
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="outputDelayed">
@@ -481,11 +517,11 @@
                                                 </ul>
                                             </div>
                                             <button type="button" id="outputStepByStep"
-                                                class="btn btn-primary me-2 output-control" disabled>
+                                                class="btn btn-primary me-2 output-control">
                                                 Schritt für Schritt
                                             </button>
                                             <button type="button" id="resetButton"
-                                                class="btn btn-error me-2 output-control" disabled>
+                                                class="btn btn-danger me-2 output-control">
                                                 Reset
                                             </button>
                                         </div>
@@ -495,7 +531,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="closeButton" class="btn btn-secondary" data-bs-dismiss="modal"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Zurück zur Eingabe">Schliessen</button>
                     </div>
                 </div>
             </div>

@@ -24,92 +24,79 @@ function printStateTableRow(row, rowNum) {
 
 function printStateGraph(row) {
 
+  console.log(row);
   // light-grey: #f8f9fa
   // dark-grey: #6c757d
   // green: #2A8754
 
   // initial state graph (arrow)
   const e0 = document.getElementById('e0');
-  for (let i = 0, l = e0.children.length; i < l; i++) {
-    const nodeChild = e0.children[i];
-    if(nodeChild.classList.contains("background")) {
-      changeColor(nodeChild, "bg-dark", "bg-success");
-    } else if(nodeChild.classList.contains("border")) {
-      changeColor(nodeChild, "border-dark", "border-success");
-    }
-  }
+  e0.classList.add("active-state");
 
   // state zero
   for (const element of row) {
-    console.log(document.getElementById('e' + row.join('')));
-    
     if (Number.isInteger(element)) { // first and last row value 
-      const nodeId = document.getElementById('s' + element);
-      console.log(document.getElementById(nodeId));
-
-      for (let i = 0, l = nodeId.children.length; i < l; i++) {
-        const nodeChild = nodeId.children[i];
-        if(nodeChild.classList.contains("background")) {
-          changeColor(nodeChild, "bg-dark", "bg-success");
-        } else if(nodeChild.classList.contains("border")) {
-          changeColor(nodeChild, "border-dark", "border-success");
-        }
-      }
+      const nodeId = 's' + element;
+      const node = document.getElementById(nodeId);
+      // console.log(node);
+      node.classList.add("active-state");
     } else {
-      //
+      const edgeId = 'e' + row.join('');
+      const edge = document.getElementById(edgeId);
+      // console.log(edge);
+      edge.classList.add("active-state");
     }
   }
-  // document.getElementById('s0').classList.add("bg-success");
-
-  // method to change graph color
-  function changeColor(element, o, r){
-    element.classList.replace(o, r);
-  }
-
-  
 }
 
 
 
-function clearUi() {
+function resetUi() {
+
+  step = 0;
+
   const transitions = document.getElementById("transitions");
-
-
-  document.getElementById("outputAll").setAttribute("disabled", "");
-  document.getElementById("outputDelayed").setAttribute("disabled", "");
-  document.getElementById("outputStepByStep").setAttribute("disabled", "");
-
-  const nodes = document.querySelectorAll(".graph-node");
-
-  for (let i = 0, l = nodes.length; i < l; ++i) {
-    for (let j = 0, cl = nodes[i].children.length; j < cl; j++) {
-
-      const node = nodes[i].children[j];
-
-      if (node.className == "graph-letter") {
-        //
-      } else {
-        //
-      }
-
-    }
-  }
-
-  const edges = document.querySelectorAll(".graph-edge");
-  for (let i = 0, l = edges.length; i < l; ++i) {
-    for (let j = 0, cl = edges[i].children.length; j < cl; j++) {
-      if (edges[i].children[j].className != "edge-bg") {
-        edges[i].children[j].setAttribute("stroke", "#6c757d");
-        edges[i].children[j].setAttribute("fill", "#6c757d");
-      }
-    }
-  }
 
   while (transitions.firstChild) {
     transitions.removeChild(transitions.firstChild);
   }
 
-  step = 0;
+  const nodes = document.querySelectorAll(".active-state");
+  for (let i = 0, l = nodes.length; i < l; i++) {
+    nodes[i].classList.remove("active-state");
+  }
+  /*   document.getElementById("outputAll").setAttribute("disabled", "");
+    document.getElementById("outputDelayed").setAttribute("disabled", "");
+    document.getElementById("outputStepByStep").setAttribute("disabled", "");
+  
+    const nodes = document.querySelectorAll(".graph-node");
+  
+    for (let i = 0, l = nodes.length; i < l; ++i) {
+      for (let j = 0, cl = nodes[i].children.length; j < cl; j++) {
+  
+        const node = nodes[i].children[j];
+  
+        if (node.className == "graph-letter") {
+          //
+        } else {
+          //
+        }
+  
+      }
+    }
+  
+    const edges = document.querySelectorAll(".graph-edge");
+    for (let i = 0, l = edges.length; i < l; ++i) {
+      for (let j = 0, cl = edges[i].children.length; j < cl; j++) {
+        if (edges[i].children[j].className != "edge-bg") {
+          edges[i].children[j].setAttribute("stroke", "#6c757d");
+          edges[i].children[j].setAttribute("fill", "#6c757d");
+        }
+      }
+    } */
+
+
+
 }
 
 
@@ -181,9 +168,10 @@ function startMachine(sequence) {
   // }
 
   // To do: clean-up with loop
-  document.getElementById("outputAll").removeAttribute("disabled");
+/*   document.getElementById("outputAll").removeAttribute("disabled");
   document.getElementById("outputDelayed").removeAttribute("disabled");
   document.getElementById("outputStepByStep").removeAttribute("disabled");
+  document.getElementById("resetButton").removeAttribute("disabled"); */
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -226,9 +214,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
     startMachine(proof[randomInt(0, proof.length)]);
   });
 
-  // document.getElementById("clear").addEventListener("click", function () {
-  //   clearUi();
-  // });
+  document.getElementById("resetButton").addEventListener("click", function () {
+    resetUi();
+  });
+  
+  document.getElementById("closeButton").addEventListener("click", function () {
+    resetUi();
+  });
+
+  document.getElementById("closeButtonX").addEventListener("click", function () {
+    resetUi();
+  });
 
   /**
    * Controls
