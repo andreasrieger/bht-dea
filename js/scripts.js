@@ -62,7 +62,7 @@ function resetGraph() {
   }
 }
 
-function resetTable(){
+function resetTable() {
   step = 0;
   const transitions = document.getElementById("transitions");
   while (transitions.firstChild) {
@@ -70,11 +70,11 @@ function resetTable(){
   }
 }
 
-function resetUserInput(){
+function resetUserInput() {
   document.getElementById("userInput").value = "";
 }
 
-function resetOutput(){
+function resetOutput() {
   document.getElementById("resultOutput").classList.remove("alert-danger", "alert-success");
 }
 
@@ -86,11 +86,11 @@ function runAuto() {
 }
 
 function runDelayed(delay) {
-  console.log(output);
+  // console.log(output);
   for (let i = 0, l = output.length; i < l; i++) {
     setTimeout(
       (y) => {
-        console.log(output[y]);
+        // console.log(output[y]);
         printStateTableRow(output[y], y + 1);
         printStateGraph(output[y]);
       },
@@ -165,7 +165,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
   const startButton = document.getElementById("startButton");
 
   userInput.addEventListener("input", () => {
-    if (userInput.checkValidity()) startButton.setAttribute("data-bs-toggle", "modal");
+    if (userInput.checkValidity()) {
+      startButton.setAttribute("data-bs-toggle", "modal");
+      document.getElementById("inputFailureMessage").classList.add("invisible");
+    }
     else startButton.removeAttribute("data-bs-toggle", "modal");
   });
 
@@ -176,9 +179,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   startButton.addEventListener("click", () => {
     if (userInput.checkValidity()) {
+      document.getElementById("inputFailureMessage").classList.add("invisible");
       startMachine(userInput.value.toUpperCase());
     }
-    else console.log("Eingabe fehlerhaft!");
+    else document.getElementById("inputFailureMessage").classList.remove("invisible");
   });
 
   /**

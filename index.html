@@ -29,24 +29,27 @@
     <div class="d-flex flex-column min-vh-100 justify-content-center align-items-center">
         <h1>Deterministischer Endlicher Automat (DEA)</h1>
         <p>Teste die Funktion eines endlichen deterministischen Automaten am Beispiel der sog. "Reber Grammar".</p>
-        <form id="form" class="row g-3">
+        <form id="form" class="row g-3 mt-5">
             <div class="col-sm-8">
                 <div class="input-group mb-3">
-                    <input type="text" id="userInput" class="form-control has-validation"
+                    <input type="text" id="userInput" class="form-control form-control-lg has-validation"
                         placeholder="Zeichenkette eingeben" aria-label="Zeichenkette eingeben" aria-describedby="random"
                         minlength="5" maxlength="255" pattern="[BbEePpSsTtVvXx]{5,255}" required>
-                    <button class="btn btn-secondary" type="button" id="random">Neu...</button>
+                    <button class="btn btn-secondary" type="button" id="random">Zufällig...</button>
                 </div>
             </div>
             <div class="col">
                 <div class="btn-group" role="mastercontrol" aria-label="Master control">
-                    <button type="button" id="startButton" class="btn btn-primary" aria-current="page"
+                    <button type="button" id="startButton" class="btn btn-primary btn-lg" aria-current="page"
                         data-bs-target="#dea">Start</button>
-                    <button type="button" id="testButton" class="btn btn-secondary" aria-current="page"
+                    <button type="button" id="testButton" class="btn btn-secondary btn-lg" aria-current="page"
                         data-bs-toggle="modal" data-bs-target="#dea">Test</button>
                 </div>
             </div>
         </form>
+        <div id="inputFailureMessage" class="row text-danger invisible">
+            Geben Sie mindestens 5 der folgenden Buchstaben ein: B, E, P, S, T, V, X
+        </div>
     </div>
     <div class="container-fluid">
         <div id="dea" class="modal" tabindex="-1">
