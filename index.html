@@ -58,8 +58,8 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="alert alert-danger" role="alert">
-                            A simple light alert—check it out!
+                        <div id="resultOutput" class="alert" role="alert">
+                            A simple alert box
                         </div>
                         <div class="row">
                             <div class="col-4">
@@ -120,6 +120,14 @@
 
                                                 .active-state path.border {
                                                     stroke: #2A8754
+                                                }
+
+                                                .state-error path.fill {
+                                                    fill: #dc3545
+                                                }
+
+                                                .state-error path.border {
+                                                    stroke: #dc3545
                                                 }
                                                 ]]>
                                             </style>

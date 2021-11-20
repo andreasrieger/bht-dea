@@ -1,8 +1,7 @@
 class Dea {
     constructor(sequence) {
-        console.log(sequence);
+        // console.log(sequence);
 
-        
         this.state = 0;
         this.finalState = 7;
         this.errorCount = 0;
@@ -15,18 +14,14 @@ class Dea {
             ];
             this.state = this.transition(val);
             if (this.state === undefined) {
-                // console.log(`Error: Status unknown`);
                 this.errorCount += 1;
                 response.push(-1);
                 transitions.push(response);
-                // console.log(response);
-                console.log(transitions);
+                // console.log(transitions);
                 return [false, transitions];
             } else {
-                // console.log(`New State: ${this.state}`);
                 response.push(this.state);
                 transitions.push(response);
-                // console.log(transitions);
             }
         }
 
