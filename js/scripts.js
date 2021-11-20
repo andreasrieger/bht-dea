@@ -19,10 +19,17 @@ function printStateTableRow(row, rowNum) {
     newCell.setAttribute("id", cellId);
     if (value == -1) {
       document.getElementById("r" + rowNum + "c" + (key - 1)).setAttribute("class", "text-danger");
-      const errorMessage = document.createElement("span");
-      const errorMessageText = document.createTextNode(`Das ${rowNum}. Zeichen "${row[1]}" der Zeichenfolge ist ungültig.`);
-      errorMessage.appendChild(errorMessageText);
-      document.getElementById("resultOutput").appendChild(errorMessage);
+
+      if (document.getElementById("errorMessage")) {
+        document.getElementById("errorMessage").classList.remove("invisible");
+      } else {
+        const errorMessage = document.createElement("span");
+        const errorMessageText = document.createTextNode(`Das ${rowNum}. Zeichen "${row[1]}" der Zeichenfolge ist ungültig.`);
+        errorMessage.setAttribute("id", "errorMessage");
+        errorMessage.setAttribute("class", "visible");
+        errorMessage.appendChild(errorMessageText);
+        document.getElementById("resultOutput").appendChild(errorMessage);
+      }
     }
     let newText = document.createTextNode((value == -1) ? "?" : value);
     newCell.appendChild(newText);
@@ -76,6 +83,14 @@ function resetUserInput() {
 
 function resetOutput() {
   document.getElementById("resultOutput").classList.remove("alert-danger", "alert-success");
+}
+
+function resetErrorMessage() {
+  document.getElementById("errorMessage").classList.add("invisible");
+  /*   const resultOutput = document.getElementById("resultOutput");
+    while (resultOutput.firstChild) {
+      resultOutput.removeChild(resultOutput.firstChild);
+    } */
 }
 
 function runAuto() {
@@ -195,6 +210,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   document.getElementById("resetButton").addEventListener("click", function () {
     resetGraph();
     resetTable();
+    resetErrorMessage();
   });
 
   document.getElementById("closeButton").addEventListener("click", function () {
