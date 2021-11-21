@@ -3,7 +3,9 @@
  */
 
 let output,
-  step = 0;
+  step = 0,
+  active = false,
+  endOfSequence = false;
 
 function printStateTableRow(row, rowNum) {
   const newRow = document.getElementById("transitions").insertRow(-1);
@@ -13,26 +15,53 @@ function printStateTableRow(row, rowNum) {
   th.setAttributeNode(thAttr);
   th.innerText = rowNum;
   newRow.appendChild(th);
+  
   for (const [key, value] of Object.entries(row)) {
     let newCell = newRow.insertCell(-1);
     const cellId = "r" + rowNum + "c" + key;
     newCell.setAttribute("id", cellId);
-    if (value == -1) {
-      document.getElementById("r" + rowNum + "c" + (key - 1)).setAttribute("class", "text-danger");
 
-      if (document.getElementById("errorMessage")) {
-        document.getElementById("errorMessage").classList.remove("invisible");
+    if (value == -1) {
+      newCell.appendChild(document.createTextNode("?"));
+      const prev = document.getElementById("r" + rowNum + "c" + (key - 1));
+      prev.setAttribute("class", "text-danger fw-bold");
+      
+      if (document.getElementById("statusMessage")) {
+        document.getElementById("statusMessage").classList.remove("invisible");
+      
       } else {
-        const errorMessage = document.createElement("span");
-        const errorMessageText = document.createTextNode(`Das ${rowNum}. Zeichen "${row[1]}" der Zeichenfolge ist ungültig.`);
-        errorMessage.setAttribute("id", "errorMessage");
-        errorMessage.setAttribute("class", "visible");
-        errorMessage.appendChild(errorMessageText);
-        document.getElementById("resultOutput").appendChild(errorMessage);
+        const statusMessage = document.createElement("span");
+        const statusMessageText = document.createTextNode(`Das ${rowNum}. Zeichen "${row[1]}" der Zeichenfolge ist ungültig.`);
+        statusMessage.setAttribute("id", "statusMessage");
+        statusMessage.setAttribute("class", "visible");
+        statusMessage.appendChild(statusMessageText);
+        document.getElementById("resultOutput").appendChild(statusMessage);
       }
+      endOfSequence = true;
+      document.getElementById("resetButton").disabled = false;
+    
+    } else if (value == 7) {
+      newCell.appendChild(document.createTextNode(value));
+      const icon = document.createElement("i");
+      icon.setAttribute("class", "bi bi-check-lg text-success");
+      newCell.appendChild(icon);
+      newCell.setAttribute("class", "text-success fw-bold");
+
+      if (document.getElementById("statusMessage")) {
+        document.getElementById("statusMessage").classList.remove("invisible");
+      } else {
+        const statusMessage = document.createElement("span");
+        const statusMessageText = document.createTextNode("Der definierte Endzustand wurde erreicht!");
+        statusMessage.setAttribute("id", "statusMessage");
+        statusMessage.setAttribute("class", "visible");
+        statusMessage.appendChild(statusMessageText);
+        document.getElementById("resultOutput").appendChild(statusMessage);
+      }
+      endOfSequence = true;
+      document.getElementById("resetButton").disabled = false;
+    } else {
+      newCell.appendChild(document.createTextNode(value));
     }
-    let newText = document.createTextNode((value == -1) ? "?" : value);
-    newCell.appendChild(newText);
   }
 }
 
@@ -57,6 +86,18 @@ function printStateGraph(row) {
   }
 }
 
+function resetUi() {
+  resetGraph();
+  resetTable();
+  resetStatusMessage();
+  endOfSequence = false;
+}
+
+function resetStatusMessage() {
+  if (document.getElementById("statusMessage")) {
+    document.getElementById("statusMessage").classList.add("invisible");
+  }
+}
 
 function resetGraph() {
   const activeNodes = document.querySelectorAll(".active-state");
@@ -85,15 +126,12 @@ function resetOutput() {
   document.getElementById("resultOutput").classList.remove("alert-danger", "alert-success");
 }
 
-function resetErrorMessage() {
-  document.getElementById("errorMessage").classList.add("invisible");
-  /*   const resultOutput = document.getElementById("resultOutput");
-    while (resultOutput.firstChild) {
-      resultOutput.removeChild(resultOutput.firstChild);
-    } */
+function runStop() {
+  active = false;
 }
 
 function runAuto() {
+  resetUi();
   for (let i = 0, l = output.length; i < l; i++) {
     printStateTableRow(output[i], i + 1);
     printStateGraph(output[i]);
@@ -101,11 +139,11 @@ function runAuto() {
 }
 
 function runDelayed(delay) {
-  // console.log(output);
+  resetUi();
   for (let i = 0, l = output.length; i < l; i++) {
+    document.getElementById("resetButton").disabled = true;
     setTimeout(
       (y) => {
-        // console.log(output[y]);
         printStateTableRow(output[y], y + 1);
         printStateGraph(output[y]);
       },
@@ -152,6 +190,7 @@ function getRandomSequence(alphabet) {
 function startMachine(sequence) {
   const machine = new Dea(sequence);
   output = machine[1];
+  active = true;
   const resultOutput = document.getElementById("resultOutput");
   const result = [];
   for (const char of sequence) result.push(char);
@@ -162,6 +201,17 @@ function startMachine(sequence) {
   } else {
     resultOutput.classList.add("alert-danger");
     resultOutput.innerText = `Die Zeichenfolge "${resultText}" wurde nicht akzeptiert. `;
+  }
+}
+
+function setStartButton(ready) {
+  const startButton = document.getElementById("startButton");
+  if (ready) {
+    startButton.setAttribute("data-bs-toggle", "modal");
+    startButton.classList.replace("btn-outline-secondary", "btn-success");
+  } else {
+    startButton.removeAttribute("data-bs-toggle", "modal");
+    startButton.classList.replace("btn-success", "btn-outline-secondary");
   }
 }
 
@@ -177,19 +227,33 @@ document.addEventListener("DOMContentLoaded", function (event) {
       ["B", "T", "S", "X", "X", "V", "P", "S", "E"]
     ];
   const userInput = document.getElementById("userInput");
-  const startButton = document.getElementById("startButton");
+  // const startButton = document.getElementById("startButton");
 
   userInput.addEventListener("input", () => {
     if (userInput.checkValidity()) {
-      startButton.setAttribute("data-bs-toggle", "modal");
+      setStartButton(true);
       document.getElementById("inputFailureMessage").classList.add("invisible");
     }
-    else startButton.removeAttribute("data-bs-toggle", "modal");
+    else setStartButton(false);
   });
 
-  document.getElementById("random").addEventListener("click", () => {
+  document.getElementById("randomProof").addEventListener("click", function () {
+    resetOutput();
+    resetUserInput();
+    userInput.value = proof[randomInt(0, proof.length - 1)].join('');
+    setStartButton(true);
+  });
+
+  document.getElementById("randomUnproof").addEventListener("click", () => {
+    resetOutput();
+    resetUserInput();
     userInput.value = getRandomSequence(sigma).join('');
-    startButton.setAttribute("data-bs-toggle", "modal");
+    setStartButton(true);
+  });
+
+  document.getElementById("resetUserInput").addEventListener("click", function () {
+    resetUserInput();
+    setStartButton(false);
   });
 
   startButton.addEventListener("click", () => {
@@ -200,31 +264,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
     else document.getElementById("inputFailureMessage").classList.remove("invisible");
   });
 
-  /**
-   * Start DEA with random working sequence
-   */
-  document.getElementById("testButton").addEventListener("click", function () {
-    startMachine(proof[randomInt(0, proof.length)]);
-  });
-
   document.getElementById("resetButton").addEventListener("click", function () {
-    resetGraph();
-    resetTable();
-    resetErrorMessage();
+    resetUi();
   });
 
   document.getElementById("closeButton").addEventListener("click", function () {
-    resetGraph();
-    resetTable();
-    resetOutput();
+    resetUi();
     resetUserInput();
+    runStop();
   });
 
   document.getElementById("closeButtonX").addEventListener("click", function () {
-    resetGraph();
-    resetTable();
-    resetOutput();
+    resetUi();
     resetUserInput();
+    runStop();
   });
 
   /**
