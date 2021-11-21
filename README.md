@@ -1,4 +1,4 @@
-# dea
+# Deterministischer Endlicher Automat (DEA)
 Realisierung eines deterministischen endlichen Automaten
 
 Autor: Andreas Rieger
